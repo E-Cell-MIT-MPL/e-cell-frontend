@@ -1,7 +1,7 @@
 // /data/ipc-config.ts
 
 export const REGISTRATION_CLOSES_DATE = "2025-12-17T23:59:59";
-export const SUBMISSION_CLOSES_DATE = "2025-12-23T23:59:59";
+export const SUBMISSION_CLOSES_DATE = "2026-01-21T23:59:59";
 
 // --- Types ---
 export type Benefit = {

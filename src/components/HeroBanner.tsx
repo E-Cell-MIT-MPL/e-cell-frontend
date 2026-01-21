@@ -48,7 +48,7 @@ export const HeroBanner: React.FC = () => {
                   className="text-xs font-semibold px-3 py-1 rounded-full 
                    bg-emerald-500/15 text-emerald-400 ring-1 ring-emerald-400/30"
                 >
-                  📣 Phase 2: Policy Case Study Submission Open
+                  📣 Phase 4:  Final Policy Document Submission Open
                 </span>
               </div>
               <div className="inline-flex items-center gap-3 mb-3">
