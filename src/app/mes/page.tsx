@@ -4,6 +4,8 @@ import Link from "next/link";
 // Components
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SponsorCarousel from "@/components/mes/SponsorCarousel"; //mes components
+import EventScrollStack from "@/components/mes/EventScrollStack"; //mes components
 
 // Static metadata for SEO
 export const metadata: Metadata = {
@@ -129,6 +131,11 @@ export default function MESComingSoonPage() {
               </div>
             </div>
           </div>
+          {/* Events Scroll Stack */}
+          <EventScrollStack />
+          
+          {/* Sponsors Carousel */}
+          <SponsorCarousel />
 
           {/* Social Proof */}
           <div className="mb-8">
