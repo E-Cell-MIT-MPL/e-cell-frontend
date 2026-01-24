@@ -4,6 +4,125 @@ import Link from "next/link";
 // Components
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import DomeGallery from "@/components/DomeGallery";
+
+const mesGalleryImages = [
+  {
+    src: "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80",
+    alt: "Audience at a startup event",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=80",
+    alt: "Panel discussion on stage",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
+    alt: "Networking at an entrepreneurship summit",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1485217988980-11786ced9454?auto=format&fit=crop&w=1200&q=80",
+    alt: "Speaker presenting at a conference",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1522202222206-79c6a5fd3e0e?auto=format&fit=crop&w=1200&q=80",
+    alt: "Students collaborating on laptops",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80",
+    alt: "Workshop session in progress",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1200&q=80",
+    alt: "Startup pitch on stage",
+  },
+];
+
+const pastSpeakersRow1 = [
+  {
+    name: "Aarav Mehta",
+    title: "Founder & CEO",
+    company: "Nova Labs",
+    image:
+      "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=400&q=80",
+  },
+  {
+    name: "Diya Kapoor",
+    title: "Partner",
+    company: "Crest Capital",
+    image:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80",
+  },
+  {
+    name: "Rohan Nair",
+    title: "Head of Product",
+    company: "Bluemint",
+    image:
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80",
+  },
+  {
+    name: "Isha Verma",
+    title: "Co-founder",
+    company: "OrbitX",
+    image:
+      "https://images.unsplash.com/photo-1548142813-c348350df52b?auto=format&fit=crop&w=400&q=80",
+  },
+];
+
+const pastSpeakersRow2 = [
+  {
+    name: "Karthik Rao",
+    title: "VP, Growth",
+    company: "ZenStack",
+    image:
+      "https://images.unsplash.com/photo-1546525848-3ce03ca516f6?auto=format&fit=crop&w=400&q=80",
+  },
+  {
+    name: "Mira Shah",
+    title: "Angel Investor",
+    company: "Shah Ventures",
+    image:
+      "https://images.unsplash.com/photo-1544723795-3fb0b90cffc6?auto=format&fit=crop&w=400&q=80",
+  },
+  {
+    name: "Aditya Singh",
+    title: "CTO",
+    company: "HelioGrid",
+    image:
+      "https://images.unsplash.com/photo-1544723795-432537d12f6c?auto=format&fit=crop&w=400&q=80",
+  },
+  {
+    name: "Sara Fernandes",
+    title: "Head of Innovation",
+    company: "Northbridge",
+    image:
+      "https://images.unsplash.com/photo-1544723795-3fb0b90d61b7?auto=format&fit=crop&w=400&q=80",
+  },
+];
+
+// Dome settings (code-only “controls”)
+// Tweak these values to change how the dome looks/behaves on /mes.
+const MES_DOME_CONFIG = {
+  // Visual density
+  segments: 25,
+
+  // Dome radius (indirect). Higher = bigger/closer dome.
+  fit: 0.6,
+
+  // Interaction + motion
+  autoRotate: true,
+  autoRotateSpeedDegPerSec: 6,
+  stopAutoRotateOnUserInteraction: true,
+  maxVerticalRotationDeg: 5,
+  dragSensitivity: 20,
+
+  // Enlarge size
+  openedImageWidth: "298px",
+  openedImageHeight: "298px",
+
+  // Styling
+  overlayBlurColor: "#020617",
+  grayscale: true,
+} as const;
 
 // Static metadata for SEO
 export const metadata: Metadata = {
@@ -18,141 +137,163 @@ export default function MESComingSoonPage() {
     <div className="min-h-screen bg-slate-900 text-white overflow-hidden">
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center">
-        {/* Background Animation */}
+      {/* Dome Gallery Hero (first thing users see) */}
+      <section className="relative h-[92vh] min-h-[640px] w-full overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900/50 to-slate-900" />
-
-          {/* Animated Background Elements */}
-          <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-indigo-500/5 rounded-full blur-3xl animate-pulse delay-2000" />
+          <DomeGallery images={mesGalleryImages} {...MES_DOME_CONFIG} />
         </div>
 
-        {/* Main Content */}
-        <div className="relative z-10 container mx-auto p-16 text-center">
-          {/* MES Logo/Branding */}
-          <div className="mb-8">
-            <h1 className="text-7xl md:text-9xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-blue-600 bg-clip-text text-transparent mb-4">
-              MES
+        {/* Subtle overlay + text */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-950/20 to-slate-900/90 pointer-events-none" />
+        {/* Bottom fade for smoother scroll transition */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent via-slate-900/80 to-slate-900" />
+        <div className="relative z-10 h-full flex items-center justify-center">
+          <div className="container mx-auto px-6 text-center">
+            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-300 via-purple-300 to-blue-500 bg-clip-text text-transparent">
+              MES 2026
             </h1>
-            <h2 className="text-2xl md:text-4xl font-bold text-white mb-2">
+            <p className="mt-4 text-lg md:text-xl text-slate-200">
               Manipal Entrepreneurship Summit
+            </p>
+            <p className="mt-2 text-sm md:text-base text-slate-300 max-w-3xl mx-auto">
+              Get ready for the biggest entrepreneurship event of the year. Where innovation meets
+              opportunity, and dreams become reality.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Past Speakers – parallax background + 2 carousels */}
+      <section className="relative py-20 md:py-28 overflow-hidden">
+        {/* Parallax-ish background */}
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-fixed bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950" />
+        <div className="pointer-events-none absolute -top-48 left-[-10%] h-80 w-80 rounded-full bg-blue-500/10 blur-3xl" />
+        <div className="pointer-events-none absolute top-24 right-[-10%] h-96 w-96 rounded-full bg-purple-500/10 blur-3xl" />
+
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              @keyframes mes-marquee-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+              @keyframes mes-marquee-right { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+            `,
+          }}
+        />
+
+        <div className="container mx-auto px-6">
+          <div className="mb-10 text-center">
+            <p className="text-xs uppercase tracking-[0.3em] text-blue-300/80">
+              Our Past Speakers
+            </p>
+            <h2 className="mt-3 text-2xl md:text-3xl font-semibold text-white">
+              Leaders who&apos;ve shared their stories at MES
             </h2>
-            <div className="flex items-center justify-center gap-4 mb-8">
-              <div className="h-px bg-gradient-to-r from-transparent via-blue-400 to-transparent w-24" />
-              <span className="text-blue-400 font-medium text-lg">2026</span>
-              <div className="h-px bg-gradient-to-r from-transparent via-blue-400 to-transparent w-24" />
-            </div>
-          </div>
-
-          {/* Coming Soon Message */}
-          <div className="mb-12">
-            <p className="text-xl md:text-2xl text-slate-300 mb-6 max-w-3xl mx-auto leading-relaxed">
-              Get ready for the biggest entrepreneurship event of the year.
-              Where innovation meets opportunity, and dreams become reality.
+            <p className="mt-3 text-sm md:text-base text-slate-300 max-w-2xl mx-auto">
+              Two quick highlights from previous editions.
             </p>
+          </div>
 
-            {/* Key Features */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
-              <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-600/30 rounded-xl p-6">
-                <div className="w-12 h-12 bg-blue-600/20 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <svg
-                    className="w-6 h-6 text-blue-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                    />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-2">
-                  Industry Leaders
-                </h3>
-                <p className="text-slate-400 text-sm">
-                  Learn from successful entrepreneurs and industry experts
-                </p>
-              </div>
+          {/* Carousel Row 1 */}
+          <div className="relative mb-10">
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-slate-900 to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-slate-900 to-transparent" />
 
-              <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-600/30 rounded-xl p-6">
-                <div className="w-12 h-12 bg-green-600/20 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <svg
-                    className="w-6 h-6 text-green-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+            <div className="overflow-hidden py-1">
+              <div
+                className="flex gap-6 md:gap-8"
+                style={{ width: "max-content", animation: "mes-marquee-left 28s linear infinite" }}
+              >
+                {[...pastSpeakersRow1, ...pastSpeakersRow1].map((s, i) => (
+                  <button
+                    key={`${s.name}-r1-${i}`}
+                    type="button"
+                    className="group relative h-80 w-64 shrink-0 overflow-hidden rounded-3xl border border-slate-800 bg-slate-950/80 text-left shadow-[0_18px_45px_rgba(15,23,42,0.9)] transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_22px_60px_rgba(15,23,42,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M13 10V3L4 14h7v7l9-11h-7z"
+                    {/* Speaker image */}
+                    <img
+                      src={s.image}
+                      alt={s.name}
+                      className="absolute inset-0 h-full w-full object-cover opacity-90 transition duration-500 group-hover:scale-105 group-active:scale-100"
                     />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-2">
-                  Startup Showcase
-                </h3>
-                <p className="text-slate-400 text-sm">
-                  Pitch your ideas and compete for exciting prizes
-                </p>
-              </div>
 
-              <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-600/30 rounded-xl p-6">
-                <div className="w-12 h-12 bg-purple-600/20 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <svg
-                    className="w-6 h-6 text-purple-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                    />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-2">
-                  Workshops
-                </h3>
-                <p className="text-slate-400 text-sm">
-                  Hands-on sessions on entrepreneurship and innovation
-                </p>
+                    {/* Dark gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-slate-900/10 via-slate-950/40 to-slate-950/95" />
+
+                    {/* Pixel border glow */}
+                    <div className="pointer-events-none absolute inset-0 rounded-3xl border border-slate-700/70 group-hover:border-blue-400/80 group-active:border-blue-400/90 transition-colors duration-300" />
+
+                    {/* Pixel corners */}
+                    <div className="pointer-events-none absolute inset-0">
+                      <div className="absolute left-3 top-3 h-1.5 w-6 rounded-full bg-blue-400/0 group-hover:bg-blue-400/80 group-active:bg-blue-300 transition-colors duration-300" />
+                      <div className="absolute right-3 top-3 h-1.5 w-6 rounded-full bg-purple-400/0 group-hover:bg-purple-400/80 group-active:bg-purple-300 transition-colors duration-300" />
+                      <div className="absolute left-3 bottom-3 h-1.5 w-6 rounded-full bg-cyan-400/0 group-hover:bg-cyan-400/80 group-active:bg-cyan-300 transition-colors duration-300" />
+                      <div className="absolute right-3 bottom-3 h-1.5 w-6 rounded-full bg-emerald-400/0 group-hover:bg-emerald-400/80 group-active:bg-emerald-300 transition-colors duration-300" />
+                    </div>
+
+                    {/* Content */}
+                    <div className="relative flex h-full flex-col justify-end px-5 pb-5 pt-6">
+                      <p className="mb-1.5 text-xs font-medium uppercase tracking-[0.16em] text-slate-300/80">
+                        Past Speaker
+                      </p>
+                      <p className="text-lg font-semibold text-white group-hover:text-slate-50">
+                        {s.name}
+                      </p>
+                      <p className="mt-1 text-[11px] text-slate-300">
+                        {s.title} · <span className="text-slate-100">{s.company}</span>
+                      </p>
+                    </div>
+                  </button>
+                ))}
               </div>
             </div>
           </div>
 
-          {/* Social Proof */}
-          <div className="mb-8">
-            <p className="text-slate-400 mb-4">
-              Join 2000+ entrepreneurs who attended our previous summits
-            </p>
-            <div className="flex justify-center gap-6 text-slate-500">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-blue-400">50+</div>
-                <div className="text-sm">Speakers</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-green-400">100+</div>
-                <div className="text-sm">Startups</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-purple-400">2000+</div>
-                <div className="text-sm">Attendees</div>
+          {/* Carousel Row 2 */}
+          <div className="relative">
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-slate-900 to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-slate-900 to-transparent" />
+
+            <div className="overflow-hidden py-1">
+              <div
+                className="flex gap-6 md:gap-8"
+                style={{ width: "max-content", animation: "mes-marquee-right 32s linear infinite" }}
+              >
+                {[...pastSpeakersRow2, ...pastSpeakersRow2].map((s, i) => (
+                  <button
+                    key={`${s.name}-r2-${i}`}
+                    type="button"
+                    className="group relative h-80 w-64 shrink-0 overflow-hidden rounded-3xl border border-slate-800 bg-slate-950/80 text-left shadow-[0_18px_45px_rgba(15,23,42,0.9)] transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_22px_60px_rgba(15,23,42,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70"
+                  >
+                    <img
+                      src={s.image}
+                      alt={s.name}
+                      className="absolute inset-0 h-full w-full object-cover opacity-90 transition duration-500 group-hover:scale-105 group-active:scale-100"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-slate-900/10 via-slate-950/40 to-slate-950/95" />
+                    <div className="pointer-events-none absolute inset-0 rounded-3xl border border-slate-700/70 group-hover:border-blue-400/80 group-active:border-blue-400/90 transition-colors duration-300" />
+                    <div className="pointer-events-none absolute inset-0">
+                      <div className="absolute left-3 top-3 h-1.5 w-6 rounded-full bg-blue-400/0 group-hover:bg-blue-400/80 group-active:bg-blue-300 transition-colors duration-300" />
+                      <div className="absolute right-3 top-3 h-1.5 w-6 rounded-full bg-purple-400/0 group-hover:bg-purple-400/80 group-active:bg-purple-300 transition-colors duration-300" />
+                      <div className="absolute left-3 bottom-3 h-1.5 w-6 rounded-full bg-cyan-400/0 group-hover:bg-cyan-400/80 group-active:bg-cyan-300 transition-colors duration-300" />
+                      <div className="absolute right-3 bottom-3 h-1.5 w-6 rounded-full bg-emerald-400/0 group-hover:bg-emerald-400/80 group-active:bg-emerald-300 transition-colors duration-300" />
+                    </div>
+                    <div className="relative flex h-full flex-col justify-end px-5 pb-5 pt-6">
+                      <p className="mb-1.5 text-xs font-medium uppercase tracking-[0.16em] text-slate-300/80">
+                        Past Speaker
+                      </p>
+                      <p className="text-lg font-semibold text-white group-hover:text-slate-50">
+                        {s.name}
+                      </p>
+                      <p className="mt-1 text-[11px] text-slate-300">
+                        {s.title} · <span className="text-slate-100">{s.company}</span>
+                      </p>
+                    </div>
+                  </button>
+                ))}
               </div>
             </div>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="mt-12 flex justify-center">
             <Link
               href="/about"
               className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-full font-medium transition-all duration-300 transform hover:scale-105 shadow-lg"
