@@ -31,7 +31,6 @@ export default function ParticleBackground() {
 
   return (
     <div className="absolute inset-0 overflow-hidden">
-      {/* Floating Particles */}
       {particles.map((p, i) => (
         <div
           key={i}
@@ -44,7 +43,6 @@ export default function ParticleBackground() {
           }}
         />
       ))}
-      {/* Larger floating elements */}
       {largeParticles.map((p, i) => (
         <div
           key={`large-${i}`}
