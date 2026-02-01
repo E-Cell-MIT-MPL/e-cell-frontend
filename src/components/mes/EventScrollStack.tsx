@@ -48,6 +48,7 @@ export default function EventScrollStack() {
         stackPosition="25%"
         baseScale={0.92}
         itemScale={0.02}
+        onStackComplete={() => {}}
       >
         {events.map((event, index) => (
           <ScrollStackItem
