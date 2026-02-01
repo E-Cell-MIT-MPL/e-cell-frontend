@@ -34,7 +34,7 @@ export default function SponsorCarousel() {
 
       <div className="relative h-[120px] overflow-hidden">
         <LogoLoop
-          logos={sponsors}
+          logos={sponsors as any}
           speed={80}
           direction="left"
           logoHeight={60}

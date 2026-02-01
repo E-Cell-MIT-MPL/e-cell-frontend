@@ -1,11 +1,24 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, ReactNode } from 'react';
 import './ScrollStack.css';
 
-export const ScrollStackItem = ({ children, itemClassName = '' }) => (
+export const ScrollStackItem = ({ children, itemClassName = '' }: { children: ReactNode, itemClassName?: string }) => (
   <div className={`scroll-stack-card ${itemClassName}`.trim()}>{children}</div>
 );
+
+interface ScrollStackProps {
+  children: ReactNode;
+  className?: string;
+  itemDistance?: number;
+  itemScale?: number;
+  itemStackDistance?: number;
+  stackPosition?: string;
+  scaleEndPosition?: string;
+  baseScale?: number;
+  useWindowScroll?: boolean;
+  onStackComplete?: () => void;
+}
 
 const ScrollStack = ({
   children,
@@ -18,27 +31,26 @@ const ScrollStack = ({
   baseScale = 0.85,
   useWindowScroll = false,
   onStackComplete
-}) => {
-  const scrollerRef = useRef(null);
+}: ScrollStackProps) => {
+  const scrollerRef = useRef<HTMLDivElement | null>(null);
   const stackCompletedRef = useRef(false);
-  const rafRef = useRef(null);
-  const cardsRef = useRef([]);
-  const cardPositionsRef = useRef([]);
+  const rafRef = useRef<number | null>(null);
+  const cardsRef = useRef<HTMLElement[]>([]);
+  const cardPositionsRef = useRef<number[]>([]);
   const isTickingRef = useRef(false);
 
-  const parsePercentage = useCallback((value, containerHeight) => {
+  const parsePercentage = useCallback((value: string | number, containerHeight: number) => {
     if (typeof value === 'string' && value.includes('%')) {
       return (parseFloat(value) / 100) * containerHeight;
     }
-    return parseFloat(value);
+    return parseFloat(value as string);
   }, []);
 
-  // Cache card positions on mount/resize
   const cachePositions = useCallback(() => {
     const cards = cardsRef.current;
     if (!cards.length) return;
 
-    cardPositionsRef.current = cards.map(card => {
+    cardPositionsRef.current = cards.map((card: any) => {
       if (useWindowScroll) {
         const rect = card.getBoundingClientRect();
         return rect.top + window.scrollY;
@@ -65,10 +77,10 @@ const ScrollStack = ({
     const endElementTop = endElement 
       ? (useWindowScroll 
           ? endElement.getBoundingClientRect().top + window.scrollY 
-          : endElement.offsetTop)
+          : (endElement as HTMLElement).offsetTop)
       : 0;
 
-    cards.forEach((card, i) => {
+    cards.forEach((card: any, i: number) => {
       if (!card) return;
 
       const cardTop = positions[i];
@@ -77,7 +89,6 @@ const ScrollStack = ({
       const pinStart = cardTop - stackPositionPx - itemStackDistance * i;
       const pinEnd = endElementTop - containerHeight / 2;
 
-      // Calculate scale
       let scaleProgress = 0;
       if (scrollTop >= triggerStart && scrollTop <= triggerEnd) {
         scaleProgress = (scrollTop - triggerStart) / (triggerEnd - triggerStart);
@@ -88,7 +99,6 @@ const ScrollStack = ({
       const targetScale = baseScale + i * itemScale;
       const scale = 1 - scaleProgress * (1 - targetScale);
 
-      // Calculate translateY
       let translateY = 0;
       if (scrollTop >= pinStart && scrollTop <= pinEnd) {
         translateY = scrollTop - cardTop + stackPositionPx + itemStackDistance * i;
@@ -98,7 +108,6 @@ const ScrollStack = ({
 
       card.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
 
-      // Stack complete callback
       if (i === cards.length - 1) {
         const isInView = scrollTop >= pinStart && scrollTop <= pinEnd;
         if (isInView && !stackCompletedRef.current) {
@@ -133,16 +142,14 @@ const ScrollStack = ({
     const scroller = scrollerRef.current;
     if (!scroller) return;
 
-    // Get all cards
     const cards = Array.from(
       useWindowScroll
         ? document.querySelectorAll('.scroll-stack-card')
         : scroller.querySelectorAll('.scroll-stack-card')
-    );
+    ) as HTMLElement[];
     cardsRef.current = cards;
 
-    // Set up card styles
-    cards.forEach((card, i) => {
+    cards.forEach((card: any, i: number) => {
       if (i < cards.length - 1) {
         card.style.marginBottom = `${itemDistance}px`;
       }
@@ -150,17 +157,14 @@ const ScrollStack = ({
       card.style.transformOrigin = 'top center';
     });
 
-    // Cache positions after a small delay to ensure layout is complete
     const positionTimeout = setTimeout(() => {
       cachePositions();
       updateCardTransforms();
     }, 100);
 
-    // Add scroll listener
     const scrollTarget = useWindowScroll ? window : scroller;
     scrollTarget.addEventListener('scroll', handleScroll, { passive: true });
 
-    // Recache positions on resize
     const handleResize = () => {
       cachePositions();
       updateCardTransforms();
