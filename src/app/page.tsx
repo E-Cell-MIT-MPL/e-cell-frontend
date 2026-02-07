@@ -64,14 +64,14 @@ export default function HomePage() {
                   tomorrow&apos;s unicorns are born today.
                 </p>
               </div>
-
+  
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
                 <Link
-                  href="/mes"
+                  href="https://mes26.ecellmit.in/"
                   className="group relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                 >
-                  <span className="relative z-10">MES 2026 : Coming Soon</span>
+                  <span className="relative z-10">MES 2026 WEBSITE</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 transform -skew-x-12 translate-x-full group-hover:translate-x-[-200%] transition-transform duration-1000" />
                 </Link>
 
