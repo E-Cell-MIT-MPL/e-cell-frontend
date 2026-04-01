@@ -274,8 +274,8 @@ const STEPS: Step[] = [
 
   {
     id: 2,
-    date: "07 Dec — 05 Jan 2026",
-    start: "2025-12-0T00:00:00",
+    date: "08 Dec — 05 Jan 2026",
+    start: "2025-12-08T00:00:00",
     end: "2026-01-05T23:59:59",
     title: "Round 1 — Registrations & Ideation Submissions",
     short: "Teams register and submit Pitch Deck + Explainer Video.",
