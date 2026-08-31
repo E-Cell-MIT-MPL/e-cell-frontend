@@ -59,24 +59,19 @@ const contactInfo = [
     role: "Chairperson",
     contacts: [
       {
-        name: "Bhavesh Changulani",
-        phone: "+91 63860 98299",
-        id: "contact-bhavesh",
+        name: "Khushi Nagelia",
+        phone: "+91 76674 80508",
+        id: "contact-chairperson",
       },
     ],
   },
   {
-    role: "Public Relations & Outreach Department",
+    role: "Technical Head",
     contacts: [
       {
-        name: "Ambica Mehra",
-        phone: "+91 84220 74189",
-        id: "contact-ambica",
-      },
-      {
-        name: "Preyanshi Doshi",
-        phone: "+91 78610 96669",
-        id: "contact-preyanshi",
+        name: "Sarthak Chaddha",
+        phone: "+91 63064 53524",
+        id: "contact-technical-head",
       },
     ],
   },
@@ -141,7 +136,7 @@ const SocialLink = memo(({ link }: { link: (typeof socialLinks)[0] }) => (
     href={link.href}
     target="_blank"
     rel="noopener noreferrer"
-    className="text-slate-300 hover:text-blue-400 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-800 rounded p-2"
+    className="text-white/40 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-black rounded p-2"
     aria-label={link.label}
   >
     <link.icon />
@@ -156,7 +151,7 @@ const Footer = memo(() => {
 
   return (
     <footer
-      className="bg-slate-800 text-slate-200 py-12 mt-auto"
+      className="bg-black/70 backdrop-blur-md border-t border-white/10 text-white py-12 mt-auto"
       role="contentinfo"
     >
       <div className="container mx-auto px-6">
@@ -169,7 +164,7 @@ const Footer = memo(() => {
                 <li>
                   <Link
                     href="/about"
-                    className="text-slate-300 hover:text-blue-400 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-800 rounded"
+                    className="text-white/50 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-black rounded"
                   >
                     About Us
                   </Link>
@@ -177,7 +172,7 @@ const Footer = memo(() => {
                 <li>
                   <Link
                     href="/initiatives"
-                    className="text-slate-300 hover:text-blue-400 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-800 rounded"
+                    className="text-white/50 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-black rounded"
                   >
                     Our Initiatives
                   </Link>
@@ -185,7 +180,7 @@ const Footer = memo(() => {
                 <li>
                   <Link
                     href="/team"
-                    className="text-slate-300 hover:text-blue-400 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-800 rounded"
+                    className="text-white/50 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-black rounded"
                   >
                     Meet the Team
                   </Link>
@@ -193,7 +188,7 @@ const Footer = memo(() => {
                 <li>
                   <Link
                     href="/blog"
-                    className="text-slate-300 hover:text-blue-400 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-800 rounded"
+                    className="text-white/50 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-black rounded"
                   >
                     Blog
                   </Link>
@@ -208,7 +203,7 @@ const Footer = memo(() => {
             <ul className="space-y-6">
               {contactInfo.map((group) => (
                 <li key={group.role} className="space-y-2">
-                  <p className="text-xs font-semibold tracking-wide text-gray-400 uppercase">
+                  <p className="text-white/30 text-xs font-semibold tracking-[0.2em] uppercase">
                     {group.role}
                   </p>
                   <ul className="space-y-2">
@@ -229,14 +224,14 @@ const Footer = memo(() => {
                 href={locationInfo.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-400 hover:text-blue-300 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-800 rounded underline"
+                className="text-white/50 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-black rounded underline"
                 aria-label="View E-Cell MIT Manipal location on Google Maps"
               >
                 View on Google Maps
               </Link>
             </div>
-            <address className="text-slate-300 not-italic">
-              <p className="font-medium">{locationInfo.name}</p>
+            <address className="text-white/50 not-italic">
+              <p className="font-medium text-white">{locationInfo.name}</p>
               <p>{locationInfo.building}</p>
               <p>{locationInfo.street}</p>
               <p>{locationInfo.city}</p>
@@ -245,7 +240,7 @@ const Footer = memo(() => {
         </div>
 
         {/* Divider Line */}
-        <hr className="my-8 border-slate-600" />
+        <hr className="my-8 border-white/10" />
 
         {/* Social Media Section */}
         <section className="text-center">
@@ -262,7 +257,7 @@ const Footer = memo(() => {
         </section>
 
         {/* Copyright Section */}
-        <div className="text-center text-sm text-slate-400 mt-8 pt-6 border-t border-slate-600">
+        <div className="text-center text-sm text-white/30 mt-8 pt-6 border-t border-white/10">
           <p>&copy; {currentYear} E-Cell MIT Manipal. All rights reserved.</p>
           <p className="mt-2">Empowering Innovation • Building the Future</p>
         </div>

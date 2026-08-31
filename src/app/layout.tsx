@@ -1,13 +1,15 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 
 import "./globals.css";
 import { UserProvider } from "@/components/user-provider";
+import GlobalCRTWarpBackground from "@/components/GlobalCRTWarpBackground";
 
-const robotoSans = Roboto({
+const spaceGrotesk = Space_Grotesk({
   variable: "--font-roboto-sans",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -24,7 +26,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <UserProvider>
-        <body className={`${robotoSans.variable} antialiased`}>{children}</body>
+        <body className={`${spaceGrotesk.variable} antialiased bg-[#121212] text-white selection:bg-white selection:text-black min-h-screen relative`}>
+          <GlobalCRTWarpBackground />
+          <div className="relative z-10">{children}</div>
+        </body>
       </UserProvider>
     </html>
   );

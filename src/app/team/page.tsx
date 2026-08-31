@@ -19,18 +19,19 @@ import {
 // Department Head Card Component
 function DepartmentHeadCard({ head }: { head: HeadInfo }) {
   return (
-    <div className="group bg-slate-800/80 backdrop-blur-sm border border-slate-600/30 rounded-xl overflow-hidden shadow-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:border-blue-400/50 w-full max-w-sm mx-auto">
+    <div className="group bg-white/4 border border-white/10 rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:border-white/25 w-full max-w-sm mx-auto">
       {/* Profile Image */}
-      <div className="relative h-64 overflow-hidden bg-slate-700">
+      <div className="relative h-80 overflow-hidden bg-neutral-900">
         <Image
           src={head.image}
           alt={head.name}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-110"
-          sizes="300px"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          style={{ objectPosition: head.objectPosition ?? 'center 10%' }}
+          sizes="(max-width: 768px) 100vw, 350px"
         />
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
 
         {/* Social Links */}
         <div className="absolute top-6 right-6 flex gap-3">
@@ -39,7 +40,7 @@ function DepartmentHeadCard({ head }: { head: HeadInfo }) {
               href={head.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-slate-900/70 backdrop-blur-sm p-3 rounded-full hover:bg-blue-600/80 transition-all duration-300 transform hover:scale-110"
+              className="bg-black/70 backdrop-blur-sm p-3 rounded-full hover:bg-white/20 transition-all duration-300 transform hover:scale-110"
               aria-label={`${head.name} LinkedIn Profile`}
             >
               <svg
@@ -56,7 +57,7 @@ function DepartmentHeadCard({ head }: { head: HeadInfo }) {
               href={head.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-slate-900/70 backdrop-blur-sm p-3 rounded-full hover:bg-pink-600/80 transition-all duration-300 transform hover:scale-110"
+              className="bg-black/70 backdrop-blur-sm p-3 rounded-full hover:bg-white/20 transition-all duration-300 transform hover:scale-110"
               aria-label={`Email ${head.name}`}
             >
               <svg
@@ -76,7 +77,7 @@ function DepartmentHeadCard({ head }: { head: HeadInfo }) {
         {/* Name and Position Overlay */}
         <div className="absolute bottom-0 left-0 right-0 p-6">
           <h3 className="text-2xl font-bold text-white mb-1">{head.name}</h3>
-          <p className="text-blue-400 font-medium text-lg">{head.position}</p>
+          <p className="text-white/50 font-medium text-lg">{head.position}</p>
         </div>
       </div>
     </div>
@@ -94,7 +95,7 @@ function DepartmentMenu({
   onSelectDepartment: (dept: string) => void;
 }) {
   return (
-    <nav className="bg-slate-800/50 backdrop-blur-sm border border-slate-600/30 rounded-2xl p-6">
+    <nav className="bg-white/4 border border-white/10 rounded-2xl p-6">
       <h2 className="text-2xl font-bold text-white mb-6">Departments</h2>
       <ul className="space-y-3">
         {departments.map((department) => (
@@ -103,14 +104,14 @@ function DepartmentMenu({
               onClick={() => onSelectDepartment(department)}
               className={`w-full text-left p-4 rounded-xl transition-all duration-300 ${
                 activeDepartment === department
-                  ? "bg-blue-600/80 text-white border border-blue-400/50"
-                  : "text-slate-300 hover:bg-slate-700/50 hover:text-white border border-transparent"
+                  ? "bg-white/15 text-white border border-white/30"
+                  : "text-white/50 hover:bg-white/8 hover:text-white border border-transparent"
               }`}
             >
               <span className="font-medium">{department}</span>
               {activeDepartment === department && (
                 <svg
-                  className="w-5 h-5 float-right mt-0.5 text-blue-300"
+                  className="w-5 h-5 float-right mt-0.5 text-white/50"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -147,11 +148,11 @@ function YearFilterDropdown({
     <div className="relative inline-block w-full max-w-xs">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between bg-slate-800/80 backdrop-blur-sm border border-slate-600/30 text-white px-6 py-4 rounded-xl hover:border-blue-400/50 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+        className="w-full flex items-center justify-between bg-white/5 border border-white/10 text-white px-6 py-4 rounded-xl hover:border-white/25 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/20"
       >
         <div className="flex items-center gap-3">
           <svg
-            className="w-5 h-5 text-blue-400"
+            className="w-5 h-5 text-white/40"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -181,7 +182,7 @@ function YearFilterDropdown({
           />
 
           {/* Dropdown Menu */}
-          <div className="absolute z-20 w-full mt-2 bg-slate-800 border border-slate-600/30 rounded-xl shadow-2xl overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
+          <div className="absolute z-20 w-full mt-2 bg-[#111] border border-white/10 rounded-xl shadow-2xl overflow-hidden">
             <div className="py-2">
               {availableYears.map((year) => (
                 <button
@@ -192,15 +193,15 @@ function YearFilterDropdown({
                   }}
                   className={`w-full text-left px-6 py-3 transition-colors duration-200 ${
                     selectedYear === year
-                      ? "bg-blue-600/80 text-white"
-                      : "text-slate-300 hover:bg-slate-700/50 hover:text-white"
+                      ? "bg-white/15 text-white"
+                      : "text-white/50 hover:bg-white/8 hover:text-white"
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-medium">{year}</span>
                     {selectedYear === year && (
                       <svg
-                        className="w-5 h-5 text-blue-300"
+                        className="w-5 h-5 text-white/50"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -252,22 +253,21 @@ export default function TeamPage() {
   const headsCount = currentHeads.length;
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white">
+    <div className="min-h-screen bg-transparent text-white">
       <Navbar />
 
+
       {/* Hero Section */}
-      <section className="py-16 bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900">
+      <section className="py-16 bg-black/40 backdrop-blur-sm border-b border-white/8">
         <div className="container mx-auto px-6 text-center">
-          <h1 className="text-5xl font-bold mb-6 text-white">Meet Our Team</h1>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            Discover the passionate leaders driving innovation and fostering
-            entrepreneurship across different departments at E-Cell MIT Manipal.
-          </p>
+          <p className="text-white/30 text-xs font-medium tracking-[0.3em] uppercase mb-4">Who we are</p>
+          <h1 className="text-5xl font-black mb-5 text-white tracking-tight">Meet Our Team</h1>
+          <p className="text-xl text-white/50 max-w-3xl mx-auto leading-relaxed">Discover the passionate leaders driving innovation and fostering entrepreneurship across different departments at E-Cell MIT Manipal.</p>
         </div>
       </section>
 
       {/* Main Content */}
-      <main className="py-16 bg-slate-800">
+      <main className="py-16 bg-transparent">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Department Menu - Left Side */}
@@ -292,11 +292,11 @@ export default function TeamPage() {
             {/* Department Head Display - Right Side */}
             <div className="lg:col-span-2">
               <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold text-white mb-4">
+                <h2 className="text-3xl font-black text-white mb-4 tracking-tight">
                   {activeDepartment}
                 </h2>
-                <div className="w-24 h-1 bg-blue-500 mx-auto rounded-full mb-6"></div>
-                <p className="text-slate-300 text-lg">
+                <div className="w-20 h-0.5 bg-white/10 mx-auto rounded-full mb-5"></div>
+                <p className="text-white/50 text-lg">
                   {activeDepartment === "Executive Board"
                     ? "Meet our Executive Board"
                     : `Meet the ${currentHeads.length <= 1 ? "head" : "heads"} of our ${activeDepartment} department`}
@@ -309,7 +309,9 @@ export default function TeamPage() {
                   className={`grid gap-8 ${
                     headsCount === 1
                       ? "grid-cols-1 max-w-sm mx-auto"
-                      : "grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto"
+                      : headsCount === 3
+                      ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto"
+                      : "grid-cols-1 md:grid-cols-2 max-w-3xl mx-auto"
                   }`}
                 >
                   {currentHeads.map((head, idx) => (
@@ -320,10 +322,10 @@ export default function TeamPage() {
                   ))}
                 </div>
               ) : (
-                <div className="bg-slate-800/50 border border-slate-600/30 rounded-2xl p-12 text-center">
-                  <div className="w-16 h-16 bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-12 text-center">
+                  <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
                     <svg
-                      className="w-8 h-8 text-slate-400"
+                      className="w-8 h-8 text-white/30"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -336,10 +338,10 @@ export default function TeamPage() {
                       />
                     </svg>
                   </div>
-                  <h3 className="text-xl text-slate-400 mb-2">
+                  <h3 className="text-xl text-white/50 mb-2">
                     No Team Head Available
                   </h3>
-                  <p className="text-slate-500">
+                  <p className="text-white/30">
                     This department currently has no designated head.
                   </p>
                 </div>
@@ -349,25 +351,25 @@ export default function TeamPage() {
         </div>
 
         {/* Join Team CTA */}
-        <section className="py-16 bg-slate-900/50 mt-16">
+        <section className="py-16 border-t border-white/8 mt-16">
           <div className="container mx-auto px-6 text-center">
-            <h2 className="text-3xl font-bold mb-6 text-white">
+            <h2 className="text-3xl font-black mb-5 text-white tracking-tight">
               Want to Join Our Leadership Team?
             </h2>
-            <p className="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg text-white/50 mb-10 max-w-2xl mx-auto">
               Be part of MIT Manipal&apos;s premier entrepreneurship cell and
               lead the future of innovation on campus.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="/about"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-medium transition-colors duration-200"
+                className="bg-white text-black px-8 py-4 rounded-full font-semibold text-sm tracking-wide hover:bg-white/90 transition-all duration-200"
               >
                 Learn more About Us
               </a>
               <a
                 href="/initiatives"
-                className="border-2 border-slate-500 text-slate-300 hover:bg-slate-700 hover:text-white px-8 py-4 rounded-full font-medium transition-colors duration-200"
+                className="border border-white/20 text-white/70 hover:text-white hover:border-white/40 px-8 py-4 rounded-full font-semibold text-sm tracking-wide transition-all duration-200"
               >
                 Learn About Our Work
               </a>
