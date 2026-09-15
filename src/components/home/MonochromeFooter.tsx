@@ -35,9 +35,10 @@ const contactInfo = [
     contacts: [{ name: "Khushi Nagelia", phone: "+91 76674 80508", id: "footer-contact-chairperson" }],
   },
   {
-    role: "Technical Head",
+    role: "Public Relations and Outreach Heads",
     contacts: [
-      { name: "Sarthak Chaddha", phone: "+91 63064 53524", id: "footer-contact-technical-head" },
+      { name: "Dhruv Agrawal", phone: "+91 77968 21777", id: "footer-contact-pro-head-2" },
+      { name: "Siddharth Pareekh", phone: "+91 77278 12825", id: "footer-contact-pro-head-3" },
     ],
   },
 ];

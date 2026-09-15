@@ -66,12 +66,22 @@ const contactInfo = [
     ],
   },
   {
-    role: "Technical Head",
+    role: "Public Relations and Outreach Head",
     contacts: [
       {
-        name: "Sarthak Chaddha",
-        phone: "+91 63064 53524",
-        id: "contact-technical-head",
+        name: "Dhruv Agrawal",
+        phone: "+91 77968 21777",
+        id: "contact-pro-head",
+      },
+    ],
+  },
+  {
+    role: "Public Relations and Outreach Head",
+    contacts: [
+      {
+        name: "Siddharth Pareekh",
+        phone: "+91 77278 12825",
+        id: "contact-pro-head",
       },
     ],
   },
