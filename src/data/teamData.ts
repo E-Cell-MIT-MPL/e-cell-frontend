@@ -24,8 +24,8 @@ export const teamData: YearlyTeamData = {
       { id: 105, name: "Raiyaan Mansoor", position: "Department Head", image: "/team/raiyaan-mansoor.jpg" },
     ],
     "Corporate and Alumni Relations": [
-      { id: 106, name: "Dida Divya Sai Reddy", position: "Department Head", image: "/team/dida-divya-sai-reddy.jpg", objectPosition: "center 15%", zoom: 1.6 },
-      { id: 107, name: "Drishti Choudhary", position: "Department Head", image: "/team/drishti-choudhary.jpg", objectPosition: "center 15%", zoom: 1.5 },
+      { id: 106, name: "Dida Divya Sai Reddy", position: "Department Head", image: "/team/dida-divya-sai-reddy.jpg", objectPosition: "center 0%", zoom: 1.35 },
+      { id: 107, name: "Drishti Choudhary", position: "Department Head", image: "/team/drishti-choudhary.jpg", objectPosition: "center 0%", zoom: 1.25 },
     ],
      "Technical": [
       { id: 115, name: "Sarthak Chaddha", position: "Department Head", image: "/team/sarthak-chaddha.jpg", objectPosition: "center 40%" },

@@ -30,7 +30,7 @@ function DepartmentHeadCard({ head }: { head: HeadInfo }) {
           style={{
             objectPosition: head.objectPosition ?? 'center 10%',
             ...(head.zoom && head.zoom > 1
-              ? { transform: `scale(${head.zoom})`, transformOrigin: head.objectPosition ?? 'center 10%' }
+              ? { transform: `scale(${head.zoom})`, transformOrigin: 'center bottom' }
               : {}),
           }}
           sizes="(max-width: 768px) 100vw, 350px"
