@@ -28,7 +28,7 @@ export const teamData: YearlyTeamData = {
       { id: 107, name: "Drishti Choudhary", position: "Department Head", image: "/team/drishti-choudhary.jpg", objectPosition: "center 0%", zoom: 1.25 },
     ],
      "Technical": [
-      { id: 115, name: "Sarthak Chaddha", position: "Department Head", image: "/team/sarthak-chaddha.jpg", objectPosition: "center 40%" },
+      { id: 115, name: "Sarthak Chaddha", position: "Department Head", image: "/team/sarthak-chaddha.png", objectPosition: "center 20%" },
     ],
     "Events and Operations": [
       { id: 108, name: "Vedika Singh", position: "Department Head", image: "/team/vedika-singh.jpg" },
