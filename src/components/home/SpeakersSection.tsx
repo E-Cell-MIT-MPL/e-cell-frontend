@@ -37,6 +37,8 @@ function SpeakerCard({ name, role, img }: { name: string; role: string; img: str
           <img
             src={img}
             alt={name}
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-700 brightness-90 group-hover:brightness-100"
             onError={() => setErr(true)}
           />

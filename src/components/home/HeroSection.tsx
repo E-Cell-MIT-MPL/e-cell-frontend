@@ -76,6 +76,8 @@ export default function HeroSection() {
         muted
         loop
         playsInline
+        preload="none"
+        poster="/bg-building.webp"
         className="absolute inset-0 w-full h-full object-cover"
         style={{ filter: "grayscale(100%) contrast(1.15) brightness(1.15)", opacity: 0.9 }}
       >
