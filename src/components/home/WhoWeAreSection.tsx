@@ -96,7 +96,7 @@ export default function WhoWeAreSection() {
                   src="/group1.jpg"
                   alt="E-Cell MIT Manipal team"
                   fill
-                  className="object-cover brightness-90 grayscale group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700 ease-in-out"
+                  className="object-cover brightness-95 group-hover:brightness-100 transition-all duration-700 ease-in-out"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
@@ -115,7 +115,7 @@ export default function WhoWeAreSection() {
                   src="/group2.jpg"
                   alt="E-Cell MIT Manipal members"
                   fill
-                  className="object-cover brightness-90 grayscale group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700 ease-in-out"
+                  className="object-cover brightness-95 group-hover:brightness-100 transition-all duration-700 ease-in-out"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>

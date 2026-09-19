@@ -79,7 +79,7 @@ export default function HeroSection() {
         preload="none"
         poster="/bg-building.webp"
         className="absolute inset-0 w-full h-full object-cover"
-        style={{ filter: "grayscale(100%) contrast(1.15) brightness(1.15)", opacity: 0.9 }}
+        style={{ filter: "contrast(1.1) brightness(1.05)", opacity: 0.9 }}
       >
         <source src="/hero-video.mp4" type="video/mp4" />
       </video>
