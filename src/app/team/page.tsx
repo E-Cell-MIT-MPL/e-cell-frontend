@@ -27,7 +27,12 @@ function DepartmentHeadCard({ head }: { head: HeadInfo }) {
           alt={head.name}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"
-          style={{ objectPosition: head.objectPosition ?? 'center 10%' }}
+          style={{
+            objectPosition: head.objectPosition ?? 'center 10%',
+            ...(head.zoom && head.zoom > 1
+              ? { transform: `scale(${head.zoom})`, transformOrigin: head.objectPosition ?? 'center 10%' }
+              : {}),
+          }}
           sizes="(max-width: 768px) 100vw, 350px"
         />
         {/* Gradient Overlay */}
