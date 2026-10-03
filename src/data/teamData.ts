@@ -24,11 +24,11 @@ export const teamData: YearlyTeamData = {
       { id: 105, name: "Raiyaan Mansoor", position: "Department Head", image: "/team/raiyaan-mansoor.jpg" },
     ],
     "Corporate and Alumni Relations": [
-      { id: 106, name: "Dida Divya Sai Reddy", position: "Department Head", image: "/team/dida-divya-sai-reddy.jpg", objectPosition: "center 0%", zoom: 1.35 },
+      { id: 106, name: "Dida Divya Sai Reddy", position: "Department Head", image: "/team/dida-divya-sai-redd.jpg", objectPosition: "center -60%", zoom: 1.15 },
       { id: 107, name: "Drishti Choudhary", position: "Department Head", image: "/team/drishti-choudhary.jpg", objectPosition: "center 0%", zoom: 1.25 },
     ],
      "Technical": [
-      { id: 115, name: "Sarthak Chaddha", position: "Department Head", image: "/team/sarthak-chaddha.png", objectPosition: "center 20%" },
+      { id: 115, name: "Sarthak Chaddha", position: "Department Head", image: "/team/sarthak-chaddha.png", objectPosition: "center 60%" },
     ],
     "Events and Operations": [
       { id: 108, name: "Vedika Singh", position: "Department Head", image: "/team/vedika-singh.jpg" },
@@ -39,7 +39,7 @@ export const teamData: YearlyTeamData = {
       { id: 111, name: "Aditya Vyas", position: "Department Head", image: "/team/adityavyas.jpeg" },
     ],
     "Internal Relations & Resource Management": [
-      { id: 112, name: "Vedant Mendhekar", position: "Department Head", image: "/team/vedant-mendhekar.jpg" ,objectPosition: "center 40%" },
+      { id: 112, name: "Vedant Mendhekar", position: "Department Head", image: "/team/vedant-mendhekar.jpg" ,objectPosition: "center 60%" },
     ],
     "Public Relations and Outreach": [
       { id: 113, name: "Siddharth Pareek", position: "Department Head", image: "/team/siddharth-pareek.jpg" },
