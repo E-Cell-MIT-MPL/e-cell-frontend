@@ -81,7 +81,7 @@ const contactInfo = [
       {
         name: "Siddharth Pareekh",
         phone: "+91 77278 12825",
-        id: "contact-pro-head",
+        id: "contact-pro-head-2",
       },
     ],
   },
@@ -212,7 +212,7 @@ const Footer = memo(() => {
             <h4 className="font-bold text-lg mb-4">Contact Us</h4>
             <ul className="space-y-6">
               {contactInfo.map((group) => (
-                <li key={group.role} className="space-y-2">
+                <li key={group.contacts[0].id} className="space-y-2">
                   <p className="text-white/30 text-xs font-semibold tracking-[0.2em] uppercase">
                     {group.role}
                   </p>

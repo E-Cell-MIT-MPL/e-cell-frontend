@@ -1,8 +1,20 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import CRTWarp from "@/components/CRTWarp";
 
+// Routes that render their own background.
+const ROUTES_WITH_OWN_BACKGROUND = ["/mes"];
+
 export default function GlobalCRTWarpBackground() {
+  const pathname = usePathname();
+  if (
+    ROUTES_WITH_OWN_BACKGROUND.some(
+      (r) => pathname === r || pathname?.startsWith(`${r}/`),
+    )
+  )
+    return null;
+
   return (
     <div
       className="fixed inset-0 pointer-events-none z-0 overflow-hidden w-full h-full"
