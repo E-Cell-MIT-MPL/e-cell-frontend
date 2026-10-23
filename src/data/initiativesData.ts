@@ -7,7 +7,8 @@ export interface InitiativeItem {
     | "Summits"
     | "Publications"
     | "Policy & Incubation"
-    | "Alumni & Community";
+    | "Alumni & Community"
+    | "Workshops";
   tag: string;
   status: string;
   image: string;
@@ -27,6 +28,7 @@ export const INITIATIVE_CATEGORIES = [
   "Publications",
   "Policy & Incubation",
   "Alumni & Community",
+  "Workshops",
 ] as const;
 
 export type InitiativeCategory = (typeof INITIATIVE_CATEGORIES)[number];
@@ -245,11 +247,33 @@ export const initiativesData: InitiativeItem[] = [
       "Business decision-making under constraints",
     ],
   },
+  {
+    id: "techventure",
+    num: "11",
+    heading: "TechVenture",
+    category: "Workshops",
+    tag: "Hands-On Workshop",
+    status: "August 2026",
+    image: "/initiatives/techventure.jpg",
+    description:
+      "A hands-on workshop where students dived into web development, AI agents, startup ideation, and built their own websites — all in one event.",
+    fullDescription:
+      "TechVenture was a multi-track workshop designed to give students practical experience across the core pillars of modern entrepreneurship and technology. Participants explored web development fundamentals, experimented with AI agents, worked through startup idea generation frameworks, and walked away having built and deployed their own websites. The event blended learning with doing — giving every attendee a real, tangible output.",
+    link: "/initiatives",
+    actionLabel: "Explore Initiatives",
+    isExternalLink: false,
+    statBadge: "Aug 7, 2026",
+    highlights: [
+      "Web development fundamentals and live site building",
+      "Hands-on introduction to AI agents and automation",
+      "Startup idea generation and validation frameworks",
+    ],
+  },
 ];
 
 export const INITIATIVE_METRICS = [
-  { value: "10", label: "Initiatives Featured" },
-  { value: "5", label: "Initiative Categories" },
+  { value: "11", label: "Initiatives Featured" },
+  { value: "6", label: "Initiative Categories" },
   { value: "4", label: "MES Programs Featured" },
   { value: "2", label: "Alumni & Community Formats" },
 ] as const;
