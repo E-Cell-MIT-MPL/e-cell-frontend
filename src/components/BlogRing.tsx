@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import BlogCard, { type BlogPost, getEditionNumber, formatDate } from "./BlogCard";
+import EditionCover from "./EditionCover";
 
 /** How far (in px) the cursor must travel sideways to turn the ring by one card. */
 const STEP_PX = 70;
@@ -81,7 +81,7 @@ export default function BlogRing({ posts }: BlogRingProps) {
 
   const theta = 360 / n;
   const radius = Math.max(
-    Math.round((cardW / 2 / Math.tan(Math.PI / n)) * 1.3),
+    Math.round((cardW / 2 / Math.tan(Math.PI / n)) * 1.1),
     240
   );
   const active = ((step % n) + n) % n;
@@ -173,7 +173,7 @@ export default function BlogRing({ posts }: BlogRingProps) {
             const offset = (((i - step) % n) + n) % n;
             const d = offset > n / 2 ? offset - n : offset; // signed distance from the front
             const isActive = d === 0;
-            const nearby = Math.abs(d) <= 1;
+            const dist = Math.abs(d);
             const edition = getEditionNumber(post.title);
 
             return (
@@ -182,8 +182,8 @@ export default function BlogRing({ posts }: BlogRingProps) {
                 className="absolute inset-0"
                 style={{
                   transform: `rotateY(${i * theta}deg) translateZ(${radius}px)`,
-                  opacity: isActive ? 1 : nearby ? 0.5 : 0,
-                  pointerEvents: nearby ? "auto" : "none",
+                  opacity: isActive ? 1 : dist === 1 ? 0.55 : dist === 2 ? 0.2 : 0,
+                  pointerEvents: dist <= 2 ? "auto" : "none",
                   backfaceVisibility: "hidden",
                   transition: "opacity 600ms ease",
                 }}
@@ -208,28 +208,13 @@ export default function BlogRing({ posts }: BlogRingProps) {
                     isActive ? "border-white/60" : "border-white/20"
                   }`}
                 >
-                  <div className="relative aspect-[16/10] shrink-0 overflow-hidden bg-white/5">
-                    <Image
-                      src={post.image}
-                      alt=""
-                      fill
-                      sizes="300px"
-                      className={`object-cover transition duration-500 ${
-                        isActive ? "" : "grayscale"
-                      }`}
+                  <div className="relative aspect-[16/10] shrink-0 overflow-hidden">
+                    <EditionCover
+                      edition={edition}
+                      image={post.image}
+                      highlights={post.highlights}
+                      muted={!isActive}
                     />
-                    <div
-                      aria-hidden="true"
-                      className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent"
-                    />
-                    {edition && (
-                      <span
-                        aria-hidden="true"
-                        className="absolute bottom-1 left-4 select-none text-6xl font-black leading-none text-transparent [-webkit-text-stroke:1.5px_rgba(255,255,255,0.8)]"
-                      >
-                        {edition}
-                      </span>
-                    )}
                   </div>
 
                   <div className="flex flex-1 flex-col p-5">
