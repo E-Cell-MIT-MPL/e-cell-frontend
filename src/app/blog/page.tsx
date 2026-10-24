@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BlogList from "@/components/BlogList";
+import { getEditionNumber } from "@/components/BlogCard";
 
 export const metadata: Metadata = {
   title: "Startup Scoop Blog | E-Cell MIT Manipal - Latest Entrepreneurship Insights",
@@ -18,41 +19,90 @@ const blogPosts = [
 ];
 
 export default function BlogPage() {
+  const latestEdition = getEditionNumber(blogPosts[0].title);
+
   return (
     <div className="min-h-screen bg-transparent text-white">
       <Navbar />
 
       {/* Hero */}
-      <section className="py-20 bg-black/40 backdrop-blur-sm border-b border-white/8">
-        <div className="container mx-auto px-6 text-center">
-          <p className="text-white/30 text-xs font-medium tracking-[0.3em] uppercase mb-5">Our newsletter</p>
-          <h1 className="text-5xl font-black mb-5 text-white tracking-tight">Startup Scoop</h1>
-          <p className="text-xl text-white/50 max-w-3xl mx-auto leading-relaxed mb-8">Your bi-monthly dose of entrepreneurship insights, startup success stories, and the latest trends shaping the business world.</p>
-          <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 px-5 py-2.5 rounded-full">
-            <svg className="w-4 h-4 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-            <span className="text-white/50 text-sm font-medium">Published Bi-Monthly</span>
+      <section className="relative overflow-hidden border-b border-white/10 pt-24 md:pt-32">
+        {/* Giant outlined edition number, echoing the big lettering on the MES page */}
+        {latestEdition && (
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-6 top-1/2 -translate-y-1/2 select-none text-[16rem] font-black leading-none text-transparent [-webkit-text-stroke:1.5px_rgba(255,255,255,0.18)] sm:text-[24rem] md:text-[34rem]"
+          >
+            {latestEdition}
           </div>
+        )}
+
+        <div className="container relative mx-auto px-6">
+          <p className="mb-6 text-xs font-medium uppercase tracking-[0.3em] text-white/50">
+            E-Cell MIT Manipal presents
+          </p>
+          <h1 className="mb-8 text-5xl font-black uppercase leading-[0.9] tracking-tighter sm:text-8xl md:text-9xl">
+            Startup
+            <br />
+            Scoop
+          </h1>
+          <p className="mb-14 max-w-2xl text-lg leading-relaxed text-white/60 md:text-xl">
+            Your bi-monthly dose of entrepreneurship insights, startup success
+            stories, and the latest trends shaping the business world.
+          </p>
+
+          <dl className="grid divide-y divide-white/10 overflow-hidden rounded-t-2xl border border-b-0 border-white/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+            {latestEdition && (
+              <div className="p-6">
+                <dt className="mb-2 text-xs uppercase tracking-[0.2em] text-white/40">01 — Latest</dt>
+                <dd className="text-2xl font-black uppercase tracking-tight">Edition {latestEdition}</dd>
+              </div>
+            )}
+            <div className="p-6">
+              <dt className="mb-2 text-xs uppercase tracking-[0.2em] text-white/40">02 — Published</dt>
+              <dd className="text-2xl font-black uppercase tracking-tight">Bi-monthly</dd>
+            </div>
+            <div className="p-6">
+              <dt className="mb-2 text-xs uppercase tracking-[0.2em] text-white/40">03 — Read it on</dt>
+              <dd className="text-2xl font-black uppercase tracking-tight">LinkedIn</dd>
+            </div>
+          </dl>
         </div>
       </section>
 
+      {/* White strip */}
+      <div
+        aria-hidden="true"
+        className="overflow-hidden whitespace-nowrap bg-white py-3 text-sm font-black uppercase tracking-[0.3em] text-black"
+      >
+        {Array.from({ length: 8 }, () => "Read what founders read • ").join("")}
+      </div>
+
       {/* Posts */}
-      <main className="py-20 bg-transparent">
-        <div className="container mx-auto px-6 mb-16">
-          <div className="mb-10">
-            <h2 className="text-3xl font-black text-white mb-3 tracking-tight">Latest Articles</h2>
-            <p className="text-white/40 text-lg">Catch up on the most recent startup news and entrepreneurship insights.</p>
-          </div>
+      <main className="bg-transparent py-16 md:py-24">
+        <div className="container mx-auto mb-24 px-6">
           <BlogList posts={blogPosts} />
         </div>
 
         {/* LinkedIn CTA */}
-        <section className="py-16 border-t border-white/8">
-          <div className="container mx-auto px-6 text-center">
-            <h2 className="text-3xl font-black mb-5 text-white tracking-tight">Stay Updated</h2>
-            <p className="text-lg text-white/50 mb-10 max-w-2xl mx-auto">Never miss an edition of Startup Scoop. Follow us on LinkedIn to get the latest entrepreneurship insights delivered directly to your feed.</p>
-            <a href="https://www.linkedin.com/company/ecellmit" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-full font-semibold text-sm tracking-wide hover:bg-white/90 transition-all duration-200">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>
+        <section className="container mx-auto px-6">
+          <div className="rounded-3xl border border-white/10 p-8 md:p-14">
+            <h2 className="mb-6 max-w-3xl text-4xl font-black uppercase leading-[0.95] tracking-tighter text-white md:text-6xl">
+              Never miss an edition.
+            </h2>
+            <p className="mb-10 max-w-xl text-lg leading-relaxed text-white/50">
+              Follow us on LinkedIn to get the latest entrepreneurship insights
+              delivered directly to your feed.
+            </p>
+            <a
+              href="https://www.linkedin.com/company/ecellmit"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-semibold tracking-wide text-black transition-all duration-200 hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            >
+              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>
               Follow on LinkedIn
+              <span className="sr-only"> (opens in a new tab)</span>
             </a>
           </div>
         </section>
