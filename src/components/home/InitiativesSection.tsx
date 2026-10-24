@@ -1,43 +1,24 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-
-const initiatives = [
-  {
-    num: "01",
-    heading: "Startup Scoop",
-    description:
-      "A bi-monthly newsletter delivering the latest news, trends, and updates from the world of entrepreneurship. Highlighting groundbreaking innovations, inspiring success stories, and spotlighting startups from MAHE with their journeys and achievements.",
-    tag: "Newsletter",
-  },
-  {
-    num: "02",
-    heading: "Business Clinic",
-    description:
-      "A structured mentorship program helping startups refine ideas, validate feasibility, and identify target markets. Startups test core functionality, gather user feedback, and launch simplified products guided by key performance metrics to ensure market readiness.",
-    tag: "Mentorship",
-  },
-  {
-    num: "03",
-    heading: "E-10 Summit",
-    description:
-      "The E10 Entrepreneurship Summit brings MAHE's entrepreneurial communities together to foster collaboration and innovation. Featuring discussions, success stories, charter signings, and initiatives — building a stronger entrepreneurial ecosystem in Manipal.",
-    tag: "Summit",
-  },
-];
+import Link from "next/link";
+import { initiativesData, type InitiativeItem } from "@/data/initiativesData";
 
 function InitiativeBlock({
   initiative,
   index,
   active,
 }: {
-  initiative: (typeof initiatives)[0];
+  initiative: InitiativeItem;
   index: number;
   active: boolean;
 }) {
-  return (
+  const isExternal = initiative.isExternalLink || (initiative.link?.startsWith("http") ?? false);
+  const targetLink = initiative.link || "/initiatives";
+
+  const blockContent = (
     <div
-      className="group border-b border-white/10 last:border-b-0 overflow-hidden cursor-default"
+      className="group border-b border-white/10 last:border-b-0 overflow-hidden cursor-pointer"
       style={
         active
           ? {
@@ -47,25 +28,34 @@ function InitiativeBlock({
       }
     >
       {/* Hover background */}
-      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[80px,1fr,32px] items-center gap-6 lg:gap-10 py-10 lg:py-14 transition-all duration-300 group-hover:px-4">
+      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[80px,1fr,32px] items-center gap-6 lg:gap-10 py-10 lg:py-14 transition-all duration-300 group-hover:px-4 group-hover:bg-white/[0.02]">
         {/* Number + tag */}
         <div className="flex lg:flex-col items-center lg:items-start gap-3">
-          <span className="text-white/20 font-mono text-xs tracking-widest tabular-nums">{initiative.num}</span>
-          <span className="text-white/30 text-[10px] font-medium tracking-[0.15em] uppercase border border-white/10 px-2 py-0.5">
+          <span className="text-white/25 font-mono text-xs tracking-widest tabular-nums">
+            {initiative.num}
+          </span>
+          <span className="text-white/40 text-[10px] font-medium tracking-[0.15em] uppercase border border-white/10 px-2 py-0.5 rounded">
             {initiative.tag}
           </span>
         </div>
 
         {/* Content */}
         <div>
-          <h3
-            className="text-white font-bold leading-tight mb-0 group-hover:mb-4 transition-all duration-300"
-            style={{ fontSize: "clamp(1.4rem, 3vw, 2.2rem)" }}
-          >
-            {initiative.heading}
-          </h3>
+          <div className="flex items-center gap-3">
+            <h3
+              className="text-white font-bold leading-tight mb-0 group-hover:mb-3 transition-all duration-300"
+              style={{ fontSize: "clamp(1.4rem, 3vw, 2.2rem)" }}
+            >
+              {initiative.heading}
+            </h3>
+            {initiative.statBadge && (
+              <span className="hidden sm:inline-block text-[10px] font-mono uppercase tracking-wider text-white/50 border border-white/10 px-2 py-0.5 rounded-full">
+                {initiative.statBadge}
+              </span>
+            )}
+          </div>
           {/* Description hidden until hover */}
-          <p className="text-white/40 text-sm sm:text-base leading-relaxed max-w-2xl max-h-0 overflow-hidden group-hover:max-h-40 transition-all duration-500 ease-in-out">
+          <p className="text-white/60 text-sm sm:text-base leading-relaxed max-w-2xl max-h-0 overflow-hidden group-hover:max-h-40 transition-all duration-500 ease-in-out">
             {initiative.description}
           </p>
         </div>
@@ -80,6 +70,7 @@ function InitiativeBlock({
             className="text-white/20 transition-all duration-300 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1"
             stroke="currentColor"
             strokeWidth="1.5"
+            aria-hidden="true"
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7v10" />
           </svg>
@@ -87,8 +78,32 @@ function InitiativeBlock({
       </div>
 
       {/* Subtle bottom highlight on hover */}
-      <div className="h-px bg-white/0 group-hover:bg-white/5 transition-colors duration-300" />
+      <div className="h-px bg-white/0 group-hover:bg-white/10 transition-colors duration-300" />
     </div>
+  );
+
+  if (isExternal) {
+    return (
+      <a
+        href={targetLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Learn more about ${initiative.heading} (opens in new tab)`}
+        className="block focus:outline-none focus:ring-1 focus:ring-white/30"
+      >
+        {blockContent}
+      </a>
+    );
+  }
+
+  return (
+    <Link
+      href={targetLink}
+      aria-label={`Learn more about ${initiative.heading}`}
+      className="block focus:outline-none focus:ring-1 focus:ring-white/30"
+    >
+      {blockContent}
+    </Link>
   );
 }
 
@@ -158,20 +173,20 @@ export default function InitiativesSection() {
               WHAT<br />WE DO
             </h2>
           </div>
-          <a
+          <Link
             href="/initiatives"
             className="ini-reveal inline-flex items-center gap-2 text-white/40 hover:text-white text-sm font-medium tracking-widest uppercase transition-colors duration-200 group self-start lg:mb-3"
           >
             View All
             <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
-          </a>
+          </Link>
         </div>
 
         {/* Initiative list */}
         <div className="border-t border-white/10">
-          {initiatives.map((initiative, i) => (
+          {initiativesData.slice(0, 3).map((initiative, i) => (
             <InitiativeBlock
-              key={initiative.heading}
+              key={initiative.id}
               initiative={initiative}
               index={i}
               active={active}
