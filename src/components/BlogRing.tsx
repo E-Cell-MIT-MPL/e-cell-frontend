@@ -20,6 +20,7 @@ export default function BlogRing({ posts }: BlogRingProps) {
   const [step, setStep] = useState(0);
   const [cardW, setCardW] = useState(300);
   const [reduceMotion, setReduceMotion] = useState(false);
+  const [showAll, setShowAll] = useState(false);
 
   const lastX = useRef<number | null>(null);
   const travelled = useRef(0);
@@ -48,6 +49,32 @@ export default function BlogRing({ posts }: BlogRingProps) {
         {posts.map((post) => (
           <BlogCard key={post.id} post={post} />
         ))}
+      </div>
+    );
+  }
+
+  const pillButton =
+    "inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white transition-colors duration-200 hover:bg-white hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black";
+
+  // "View all" mode: every edition in a normal grid.
+  if (showAll) {
+    return (
+      <div>
+        <div className="mb-8 flex justify-end">
+          <button
+            type="button"
+            onClick={() => setShowAll(false)}
+            aria-pressed="true"
+            className={pillButton}
+          >
+            ← Back to 3D ring
+          </button>
+        </div>
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {posts.map((post) => (
+            <BlogCard key={post.id} post={post} />
+          ))}
+        </div>
       </div>
     );
   }
@@ -259,6 +286,16 @@ export default function BlogRing({ posts }: BlogRingProps) {
       <p className="mt-4 text-center text-xs uppercase tracking-[0.2em] text-white/30">
         Move your cursor sideways or swipe to spin
       </p>
+      <div className="mt-8 flex justify-center">
+        <button
+          type="button"
+          onClick={() => setShowAll(true)}
+          aria-pressed="false"
+          className={pillButton}
+        >
+          View all {n} editions
+        </button>
+      </div>
     </div>
   );
 }
