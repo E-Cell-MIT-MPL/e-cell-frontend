@@ -1,5 +1,6 @@
 import { FeaturedBlogCard, BlogPost } from "./BlogCard";
 import BlogRing from "./BlogRing";
+import ScatterText from "./ScatterText";
 
 type BlogListProps = {
   posts: BlogPost[];
@@ -57,12 +58,12 @@ export default function BlogList({ posts }: BlogListProps) {
               <p className="mb-3 text-xs font-medium uppercase tracking-[0.3em] text-white/40">
                 02 — Back issues
               </p>
-              <h2
+              <ScatterText
+                as="h2"
                 id="archive-heading"
+                text="The archive"
                 className="text-4xl font-black uppercase tracking-tighter text-white md:text-6xl"
-              >
-                The archive
-              </h2>
+              />
             </div>
             <p className="max-w-sm text-white/40">
               Catch up on past startup news and entrepreneurship insights.

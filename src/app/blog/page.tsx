@@ -2,14 +2,34 @@ import { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BlogList from "@/components/BlogList";
-import { getEditionNumber } from "@/components/BlogCard";
+import ScatterText from "@/components/ScatterText";
+import { getEditionNumber, type BlogPost } from "@/components/BlogCard";
 
 export const metadata: Metadata = {
   title: "Startup Scoop Blog | E-Cell MIT Manipal - Latest Entrepreneurship Insights",
   description: "Stay updated with E-Cell MIT Manipal Startup Scoop newsletter featuring the latest startup news, entrepreneurship insights, and business trends.",
 };
 
-const blogPosts = [
+/**
+ * HOW TO ADD A NEW EDITION
+ * 1. Copy one block below and paste it at the TOP of the list (newest first).
+ *    The first item becomes the big "Latest edition" card and sets the number in the hero.
+ * 2. Change id, title ("Startup Scoop - Edition N"), description, postURL and publishedAt.
+ * 3. Cover picture: put the image in the /public folder (e.g. public/blogScreenshot6.webp)
+ *    and add  image: "/blogScreenshot6.webp".  If you leave `image` out, a cover is drawn
+ *    automatically from the edition number (and `highlights`, if you add them).
+ */
+const blogPosts: BlogPost[] = [
+  // ── Editions 19–23: links received. Check the number/link pairs and add dates. Descriptions for 17 and 19–21 were written from their cover pictures; edit if needed. ──
+  { id: "startup-scoop-23", image: "/edition-23.webp", title: "Startup Scoop - Edition 23", description: "Read Startup Scoop Edition 23 on LinkedIn.", postURL: "https://lnkd.in/p/gqiWGvWG" },
+  { id: "startup-scoop-22", image: "/edition-22.webp", title: "Startup Scoop - Edition 22", description: "Read Startup Scoop Edition 22 on LinkedIn.", postURL: "https://lnkd.in/p/gs5rXkxX" },
+  { id: "startup-scoop-21", image: "/edition-21.webp", title: "Startup Scoop - Edition 21", description: "The Bidding War: how the BCCI's ₹18 Cr cap shapes IPL auction bids, and where the extra money goes.", postURL: "https://lnkd.in/p/gfRHfgMM" },
+  { id: "startup-scoop-20", image: "/edition-20.webp", title: "Startup Scoop - Edition 20", description: "BugBase: bug bounty, pentesting and vulnerability disclosure programs, with hunters finding the bugs.", postURL: "https://lnkd.in/p/g9DbfJPU" },
+  { id: "startup-scoop-19", image: "/edition-19.webp", title: "Startup Scoop - Edition 19", description: "The Medtech Manufacturing Wave: India's growing push to build medical technology at home.", postURL: "https://lnkd.in/p/gTsir6fd" },
+  // Edition 17: no link received yet. This points to the E-Cell LinkedIn page for now. Replace postURL (and add publishedAt) when you have the real link.
+  { id: "startup-scoop-17", image: "/edition-17.webp", title: "Startup Scoop - Edition 17", description: "Jugaad: the art of turning \"Why me?\" into \"Try me!\" through flexibility, frugality and inclusivity.", postURL: "https://www.linkedin.com/company/ecellmit" },
+
+  // ── Existing editions ──
   { id: "startup-scoop-16", image: "/blogScreenshot.webp", title: "Startup Scoop - Edition 16", description: "Thapy makes therapy accessible, Jagriti Yatra fosters startup dreams, loss leader pricing draws customers, and tech firms overhire from FOMO and market growth.", postURL: "https://www.linkedin.com/pulse/startup-scoop-edition-16-ecellmit-dni7f/?trackingId=qEBPn%2F58SLqObIxdTvrNiw%3D%3D", publishedAt: "2024-12-15" },
   { id: "startup-scoop-15", image: "/blogScreenshot1.webp", title: "Startup Scoop - Edition 15", description: "Blackfrog Technologies boosts healthcare logistics in Fiji, AI revolutionizes finance, Ola Electric faces revenue decline, and drones improve medical supply access.", postURL: "https://www.linkedin.com/pulse/startup-scoop-edition-15-ecellmit-sew8f/", publishedAt: "2024-12-01" },
   { id: "startup-scoop-14", image: "/blogScreenshot2.webp", title: "Startup Scoop - Edition 14", description: "Instrumus expands rapid prototyping services, Acko disrupts insurance with a digital model, RBI sees a 52% increase in reserves income, and major IPOs like Swiggy and Navi are shaping India's economy.", postURL: "https://www.linkedin.com/pulse/startup-scoop-edition-14-ecellmit-fbycf/?trackingId=pEiC%2BLhqSpCUc077wVSALw%3D%3D", publishedAt: "2024-11-15" },
@@ -26,7 +46,7 @@ export default function BlogPage() {
       <Navbar />
 
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-white/10 pt-24 md:pt-32">
+      <section className="relative overflow-hidden border-b border-white/10 pb-16 pt-24 md:pb-20 md:pt-32">
         {/* Giant outlined edition number, echoing the big lettering on the MES page */}
         {latestEdition && (
           <div
@@ -41,42 +61,41 @@ export default function BlogPage() {
           <p className="mb-6 text-xs font-medium uppercase tracking-[0.3em] text-white/50">
             E-Cell MIT Manipal presents
           </p>
-          <h1 className="mb-8 text-5xl font-black uppercase leading-[0.9] tracking-tighter sm:text-8xl md:text-9xl">
-            Startup
-            <br />
-            Scoop
-          </h1>
-          <p className="mb-14 max-w-2xl text-lg leading-relaxed text-white/60 md:text-xl">
-            Your bi-monthly dose of entrepreneurship insights, startup success
-            stories, and the latest trends shaping the business world.
-          </p>
+          <ScatterText
+            as="h1"
+            text={"Startup\nScoop"}
+            radius={110}
+            className="mb-8 text-5xl font-black uppercase leading-[0.9] tracking-tighter sm:text-8xl md:text-9xl"
+          />
+          <ScatterText
+            as="p"
+            text="Your bi-monthly dose of entrepreneurship insights, startup success stories, and the latest trends shaping the business world."
+            className="mb-14 max-w-2xl text-lg leading-relaxed text-white/60 md:text-xl"
+          />
 
-          <dl className="grid divide-y divide-white/10 overflow-hidden rounded-t-2xl border border-b-0 border-white/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+          <dl className="grid divide-y divide-white/10 overflow-hidden rounded-2xl border border-white/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
             {latestEdition && (
               <div className="p-6">
                 <dt className="mb-2 text-xs uppercase tracking-[0.2em] text-white/40">01 — Latest</dt>
-                <dd className="text-2xl font-black uppercase tracking-tight">Edition {latestEdition}</dd>
+                <ScatterText
+                  as="dd"
+                  text={`Edition ${latestEdition}`}
+                  radius={70}
+                  className="text-2xl font-black uppercase tracking-tight"
+                />
               </div>
             )}
             <div className="p-6">
               <dt className="mb-2 text-xs uppercase tracking-[0.2em] text-white/40">02 — Published</dt>
-              <dd className="text-2xl font-black uppercase tracking-tight">Bi-monthly</dd>
+              <ScatterText as="dd" text="Bi-monthly" radius={70} className="text-2xl font-black uppercase tracking-tight" />
             </div>
             <div className="p-6">
               <dt className="mb-2 text-xs uppercase tracking-[0.2em] text-white/40">03 — Read it on</dt>
-              <dd className="text-2xl font-black uppercase tracking-tight">LinkedIn</dd>
+              <ScatterText as="dd" text="LinkedIn" radius={70} className="text-2xl font-black uppercase tracking-tight" />
             </div>
           </dl>
         </div>
       </section>
-
-      {/* White strip */}
-      <div
-        aria-hidden="true"
-        className="overflow-hidden whitespace-nowrap bg-white py-3 text-sm font-black uppercase tracking-[0.3em] text-black"
-      >
-        {Array.from({ length: 8 }, () => "Read what founders read • ").join("")}
-      </div>
 
       {/* Posts */}
       <main className="bg-transparent py-16 md:py-24">
@@ -87,9 +106,12 @@ export default function BlogPage() {
         {/* LinkedIn CTA */}
         <section className="container mx-auto px-6">
           <div className="rounded-3xl border border-white/10 p-8 md:p-14">
-            <h2 className="mb-6 max-w-3xl text-4xl font-black uppercase leading-[0.95] tracking-tighter text-white md:text-6xl">
-              Never miss an edition.
-            </h2>
+            <ScatterText
+              as="h2"
+              text="Never miss an edition."
+              radius={100}
+              className="mb-6 max-w-3xl text-4xl font-black uppercase leading-[0.95] tracking-tighter text-white md:text-6xl"
+            />
             <p className="mb-10 max-w-xl text-lg leading-relaxed text-white/50">
               Follow us on LinkedIn to get the latest entrepreneurship insights
               delivered directly to your feed.
