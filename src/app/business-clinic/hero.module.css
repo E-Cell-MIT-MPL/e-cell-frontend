@@ -1,0 +1,397 @@
+.hero {
+  position: relative;
+  isolation: isolate;
+  min-height: max(820px, 100svh);
+  max-height: 1200px;
+  overflow: clip;
+  background: #090909;
+  color: #f5f3ef;
+}
+.collage {
+  position: absolute;
+  inset: 0;
+  max-width: 1800px;
+  margin-inline: auto;
+}
+.photo {
+  position: absolute;
+  margin: 0;
+  overflow: hidden;
+  background: #151515;
+}
+.photoReveal,
+.photoScroll,
+.photoCursor {
+  position: absolute;
+  inset: 0;
+}
+.photoCursor {
+  inset: -10px;
+}
+.photoImage {
+  object-fit: cover;
+  filter: grayscale(1) brightness(0.78) contrast(1.08);
+}
+.photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 30px #0006;
+  border: 1px solid #ffffff0a;
+}
+.photo[data-slot="community"] {
+  left: 10%;
+  top: 9%;
+  width: 27%;
+  height: 29%;
+  clip-path: polygon(0 2%, 96% 0, 100% 96%, 2% 100%);
+}
+.photo[data-slot="presentation"] {
+  left: 39%;
+  top: 13%;
+  width: 23%;
+  height: 28%;
+}
+.photo[data-slot="conversations"] {
+  left: 63%;
+  top: 12%;
+  width: 29%;
+  height: 34%;
+  clip-path: polygon(1% 0, 100% 2%, 99% 100%, 0 98%);
+}
+.photo[data-slot="founders"] {
+  left: 59%;
+  top: 48%;
+  width: 18%;
+  height: 25%;
+}
+.photo[data-slot="audience"] {
+  left: 79%;
+  top: 49%;
+  width: 17%;
+  height: 23%;
+}
+.photo[data-slot="gathering"] {
+  left: 46%;
+  top: 70%;
+  width: 19%;
+  height: 19%;
+  clip-path: polygon(1% 0, 100% 3%, 97% 100%, 0 97%);
+}
+.photo[data-slot="team"] {
+  left: 69%;
+  top: 75%;
+  width: 23%;
+  height: 20%;
+}
+.shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, #09090925, transparent 68%),
+    radial-gradient(
+      ellipse at 20% 67%,
+      #090909 0%,
+      #09090980 32%,
+      transparent 58%
+    ),
+    linear-gradient(
+      0deg,
+      #090909 0%,
+      transparent 18%,
+      transparent 86%,
+      #09090966
+    );
+}
+.grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23n)' opacity='.45' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
+}
+.copy {
+  position: absolute;
+  z-index: 2;
+  left: 6%;
+  top: 33%;
+  width: 75%;
+}
+.hero .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 11px;
+  letter-spacing: 0.17em;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  color: #e0ded8;
+  position: relative;
+  padding-left: 58px;
+}
+.hero .headline {
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(100px, 14.4vw, 250px);
+  line-height: 0.8;
+  letter-spacing: -0.085em;
+  font-weight: 750;
+  margin-left: -0.055em;
+}
+.lineMask,
+.lineText {
+  display: block;
+  white-space: nowrap;
+}
+.hero .description {
+  margin-top: 28px;
+  max-width: 470px;
+  color: #dedbd5;
+  font-size: clamp(15px, 1.2vw, 20px);
+  line-height: 1.7;
+  letter-spacing: -0.015em;
+}
+.scroll {
+  position: absolute;
+  z-index: 3;
+  left: 42%;
+  bottom: 38px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  color: #eeeae3;
+  font-size: 10px;
+  letter-spacing: 0.13em;
+  padding: 12px 0;
+}
+.scroll svg {
+  animation: explore 2.8s ease-in-out infinite;
+}
+@keyframes explore {
+  50% {
+    transform: translateY(5px);
+  }
+}
+@media (min-width: 1800px) {
+  .copy {
+    left: max(6%, calc((100vw - 1600px) / 2));
+  }
+}
+@media (max-width: 1000px) {
+  .hero {
+    min-height: max(800px, 100svh);
+  }
+  .copy {
+    top: 34%;
+    left: 6%;
+    width: 88%;
+  }
+  .hero .headline {
+    font-size: 15vw;
+  }
+  .hero .eyebrow {
+    font-size: 10px;
+  }
+  .photo[data-slot="community"] {
+    left: 4%;
+    width: 35%;
+    top: 12%;
+    height: 25%;
+  }
+  .photo[data-slot="presentation"] {
+    left: 41%;
+    top: 15%;
+    width: 26%;
+    height: 22%;
+  }
+  .photo[data-slot="conversations"] {
+    left: 69%;
+    top: 16%;
+    width: 28%;
+    height: 30%;
+  }
+  .photo[data-slot="founders"] {
+    left: 61%;
+    top: 50%;
+    width: 20%;
+    height: 23%;
+  }
+  .photo[data-slot="audience"] {
+    left: 83%;
+    top: 52%;
+    width: 14%;
+    height: 20%;
+  }
+  .photo[data-slot="gathering"] {
+    left: 35%;
+    top: 75%;
+    width: 26%;
+    height: 17%;
+  }
+  .photo[data-slot="team"] {
+    left: 64%;
+    top: 76%;
+    width: 32%;
+    height: 19%;
+  }
+  .scroll {
+    left: 7%;
+    bottom: 38px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+@media (max-width: 600px) {
+  .hero {
+    min-height: max(900px, 100svh);
+    max-height: none;
+  }
+  .copy {
+    left: 7%;
+    top: 35%;
+    width: 88%;
+  }
+  .hero .eyebrow {
+    font-size: 8px;
+    gap: 10px;
+    letter-spacing: 0.12em;
+    margin-bottom: 20px;
+  }
+  .hero .headline {
+    font-size: 16vw;
+    line-height: 0.86;
+    letter-spacing: -0.075em;
+  }
+  .hero .description {
+    font-size: 15px;
+    margin-top: 24px;
+    max-width: 330px;
+    padding-right: 15px;
+  }
+  .lineBreak {
+    display: none;
+  }
+  .photo[data-slot="community"] {
+    top: 12%;
+    left: 3%;
+    width: 51%;
+    height: 21%;
+  }
+  .photo[data-slot="presentation"] {
+    top: 16%;
+    left: 57%;
+    width: 39%;
+    height: 16%;
+  }
+  .photo[data-slot="conversations"] {
+    top: 57%;
+    left: 45%;
+    width: 51%;
+    height: 17%;
+  }
+  .photo[data-slot="founders"] {
+    top: 63%;
+    left: 5%;
+    width: 36%;
+    height: 15%;
+  }
+  .photo[data-slot="audience"] {
+    top: 78%;
+    left: 48%;
+    width: 25%;
+    height: 11%;
+  }
+  .photo[data-slot="gathering"] {
+    top: 80%;
+    left: 8%;
+    width: 36%;
+    height: 12%;
+  }
+  .photo[data-slot="team"] {
+    top: 76%;
+    left: 76%;
+    width: 21%;
+    height: 16%;
+  }
+  .shade {
+    background:
+      linear-gradient(
+        0deg,
+        #090909,
+        transparent 12%,
+        transparent 82%,
+        #09090970
+      ),
+      linear-gradient(
+        180deg,
+        transparent 25%,
+        #090909cf 34%,
+        #090909 43%,
+        #090909c9 54%,
+        transparent 64%
+      );
+  }
+  .scroll {
+    left: 7%;
+    right: 7%;
+    bottom: 18px;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 9px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll svg {
+    animation: none;
+  }
+}
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .hero:not([data-hero-entered]) .lineMask {
+    overflow: hidden;
+  }
+  .hero:not([data-hero-entered]) .lineText {
+    transform: translateY(110%);
+    opacity: 0;
+  }
+  .hero:not([data-hero-entered]) [data-photo-reveal],
+  .hero:not([data-hero-entered]) [data-hero-support] {
+    opacity: 0;
+  }
+}
+.heroLogo {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 44px;
+  height: auto;
+  transform: translateY(-50%);
+}
+.photoPair {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+.photoFrame {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+@media (max-width: 600px) {
+  .hero .eyebrow {
+    padding-left: 42px;
+  }
+  .heroLogo {
+    width: 28px;
+  }
+  .photoPair {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 4px;
+  }
+}

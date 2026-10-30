@@ -25,6 +25,7 @@ interface CRTWarpProps {
   dpr?: number;
   fps?: number;
   paused?: boolean;
+  active?: boolean;
   className?: string;
   style?: CSSProperties;
 }
@@ -171,6 +172,7 @@ export default function CRTWarp({
   dpr = 1,
   fps = 30,
   paused = false,
+  active = true,
   className,
   style,
 }: CRTWarpProps) {
@@ -179,12 +181,23 @@ export default function CRTWarp({
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const frameRef = useRef<number | null>(null);
   const pausedRef = useRef(paused);
+  const activeRef = useRef(active);
+  const loopRef = useRef<((now: number) => void) | null>(null);
   const pointerTargetRef = useRef(new THREE.Vector2(0, 0));
   const pointerCurrentRef = useRef(new THREE.Vector2(0, 0));
   const visibleRef = useRef(true);
   const fpsRef = useRef(fps);
   const lastFrameRef = useRef(0);
 
+  useEffect(() => {
+    activeRef.current = active;
+    if (!active && frameRef.current !== null) {
+      cancelAnimationFrame(frameRef.current);
+      frameRef.current = null;
+    } else if (active && frameRef.current === null && loopRef.current) {
+      frameRef.current = requestAnimationFrame(loopRef.current);
+    }
+  }, [active]);
   useEffect(() => {
     pausedRef.current = paused;
   }, [paused]);
@@ -231,11 +244,20 @@ export default function CRTWarp({
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
-    const renderer = new THREE.WebGLRenderer({
-      antialias: false,
-      alpha: false,
-      powerPreference: "low-power",
-    });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        antialias: false,
+        alpha: false,
+        powerPreference: "low-power",
+      });
+    } catch {
+      // Keep the global charcoal fallback when WebGL is unavailable.
+      geometry.dispose();
+      material.dispose();
+      materialRef.current = null;
+      return undefined;
+    }
     rendererRef.current = renderer;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1));
@@ -250,7 +272,7 @@ export default function CRTWarp({
       renderer.setSize(width, height, false);
       material.uniforms.uResolution.value.set(
         renderer.domElement.width,
-        renderer.domElement.height
+        renderer.domElement.height,
       );
     };
 
@@ -265,6 +287,8 @@ export default function CRTWarp({
     visibilityObserver.observe(container);
 
     const render = (now: number) => {
+      frameRef.current = null;
+      if (!activeRef.current) return;
       frameRef.current = requestAnimationFrame(render);
       if (!visibleRef.current || document.hidden) return;
       const interval = 1000 / fpsRef.current;
@@ -278,13 +302,14 @@ export default function CRTWarp({
       renderer.render(scene, camera);
     };
 
-    render(0);
+    loopRef.current = render;
+    if (activeRef.current) render(0);
 
     const onPointerMove = (event: PointerEvent) => {
       const rect = container.getBoundingClientRect();
       pointerTargetRef.current.set(
         ((event.clientX - rect.left) / Math.max(rect.width, 1)) * 2 - 1,
-        -(((event.clientY - rect.top) / Math.max(rect.height, 1)) * 2 - 1)
+        -(((event.clientY - rect.top) / Math.max(rect.height, 1)) * 2 - 1),
       );
     };
     const onPointerLeave = () => pointerTargetRef.current.set(0, 0);
@@ -293,6 +318,8 @@ export default function CRTWarp({
 
     return () => {
       if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
+      frameRef.current = null;
+      loopRef.current = null;
       resizeObserver.disconnect();
       visibilityObserver.disconnect();
       window.removeEventListener("pointermove", onPointerMove);
@@ -334,11 +361,11 @@ export default function CRTWarp({
       renderer.setSize(
         Math.max(container.clientWidth, 1),
         Math.max(container.clientHeight, 1),
-        false
+        false,
       );
       uniforms.uResolution.value.set(
         renderer.domElement.width,
-        renderer.domElement.height
+        renderer.domElement.height,
       );
     }
   }, [

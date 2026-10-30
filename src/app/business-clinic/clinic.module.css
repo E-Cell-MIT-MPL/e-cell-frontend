@@ -1,0 +1,1466 @@
+.page {
+  --paper: #f5f3ef;
+  --muted: #a7a7a7;
+  --border: #ffffff26;
+  --warm: #d0c4b2;
+  background: transparent;
+  color: var(--paper);
+  isolation: isolate;
+  overflow: clip;
+  font-family: var(--font-roboto-sans), Arial, sans-serif;
+  position: relative;
+}
+.page *,
+.bookingDialog * {
+  box-sizing: border-box;
+}
+.page ::selection {
+  background: #d0c4b2;
+  color: #080808;
+}
+.page a {
+  text-decoration: none;
+}
+.page button,
+.page a {
+  -webkit-tap-highlight-color: transparent;
+}
+.page button {
+  cursor: pointer;
+  font: inherit;
+}
+.page :is(button, a, [tabindex]):focus-visible,
+.bookingDialog :is(button, a):focus-visible {
+  outline: 2px solid var(--paper, #f5f3ef);
+  outline-offset: 6px;
+}
+.page h1,
+.page h2,
+.page h3,
+.page p {
+  margin: 0;
+}
+.page h2 {
+  font-size: clamp(30px, 3.65vw, 60px);
+  line-height: 1.04;
+  letter-spacing: -0.055em;
+  font-weight: 650;
+}
+.page h3 {
+  letter-spacing: -0.025em;
+}
+.page svg {
+  flex-shrink: 0;
+}
+.scrollProgress {
+  position: fixed;
+  z-index: 60;
+  inset: 0 0 auto;
+  height: 2px;
+  background: var(--warm);
+  transform: scaleX(0);
+  transform-origin: left;
+  pointer-events: none;
+}
+.section {
+  max-width: 1536px;
+  margin: auto;
+  padding: 105px 6.5%;
+  position: relative;
+  scroll-margin-top: 105px;
+}
+.sectionHeading {
+  margin-bottom: 55px;
+}
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 10px;
+  line-height: 1.6;
+  font-weight: 400;
+  letter-spacing: 0.23em;
+  color: var(--muted);
+  margin-bottom: 24px !important;
+}
+.smallLine {
+  width: 20px;
+  height: 1px;
+  background: #b6ad9e;
+}
+.sectionRule {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  margin-left: 22px;
+}
+.headingRow {
+  display: flex;
+  gap: 40px;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.headingRow > p {
+  max-width: 350px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--muted);
+  padding-bottom: 4px;
+}
+.bodyCopy {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.9;
+  max-width: 455px;
+  margin-top: 25px !important;
+}
+.annotation {
+  font-family: "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive;
+  font-size: 19px;
+  font-weight: 400;
+  color: #c7bcaa;
+  line-height: 1.45;
+  letter-spacing: 0.015em;
+  transform: rotate(-7deg);
+}
+.annotation svg,
+.heroAnnotation svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+}
+.primaryButton,
+.secondaryButton {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  min-height: 46px;
+  border-radius: 999px;
+  padding: 0 24px;
+  font-size: 12px !important;
+  font-weight: 550 !important;
+  transition:
+    transform 0.25s,
+    background 0.25s,
+    box-shadow 0.25s;
+  white-space: nowrap;
+}
+.primaryButton {
+  background: var(--paper, #f5f3ef);
+  border: 1px solid var(--paper, #f5f3ef);
+  color: #111;
+}
+.primaryButton:hover {
+  transform: translateY(-3px);
+  background: #fff;
+  box-shadow: 0 8px 28px #d0c4b21a;
+}
+.primaryButton svg {
+  transition: transform 0.25s;
+}
+.primaryButton:hover svg {
+  transform: translate(2px, -2px);
+}
+.secondaryButton {
+  border: 1px solid #ffffff57;
+  color: var(--paper);
+  background: transparent;
+}
+.secondaryButton:hover {
+  background: #ffffff0a;
+  transform: translateY(-2px);
+}
+.tilt {
+  transform: perspective(900px) rotateX(var(--tilt-x, 0deg))
+    rotateY(var(--tilt-y, 0deg));
+  transition: transform 0.3s ease;
+}
+/* Architectural scene; all foreground cards remain actual interactive elements. */
+.hero {
+  max-width: 1700px;
+  margin: auto;
+  position: relative;
+  min-height: 760px;
+  padding: 190px 6.5% 100px;
+  display: flex;
+  align-items: center;
+}
+.heroCopy {
+  position: relative;
+  z-index: 5;
+  width: 50%;
+  pointer-events: none;
+}
+.heroCopy a,
+.heroCopy button {
+  pointer-events: auto;
+}
+.heroCopy .eyebrow {
+  letter-spacing: 0.25em;
+  margin-bottom: 16px !important;
+}
+.hero h1 {
+  font-size: clamp(46px, 4.6vw, 77px);
+  line-height: 0.99;
+  font-weight: 750;
+  letter-spacing: -0.055em;
+}
+.hero h1 > span {
+  color: #c8c1b6;
+}
+.heroDescription {
+  color: #c3c1bd;
+  font-size: 15px;
+  line-height: 1.65;
+  margin-top: 25px !important;
+}
+.desktopBreak {
+  display: none;
+}
+.heroActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+.bookingHint {
+  color: #aaa39b;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  margin-top: 13px !important;
+}
+.heroVisual {
+  position: absolute;
+  right: 0;
+  top: 100px;
+  width: 65%;
+  height: 580px;
+  perspective: 1200px;
+}
+.doorway {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  overflow: hidden;
+}
+.doorway::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      #080808 0%,
+      transparent 22%,
+      transparent 80%,
+      #080808
+    ),
+    linear-gradient(0deg, #080808 0%, transparent 17%, transparent 85%, #080808);
+}
+.doorwayImage {
+  object-fit: cover;
+  filter: saturate(0.55) brightness(0.86);
+}
+.doorLight {
+  position: absolute;
+  inset: 14% 26% 8% 32%;
+  background: #f5e6cc;
+  filter: blur(70px);
+  opacity: 0.035;
+  animation: breatheLight 9s ease-in-out infinite alternate;
+}
+.roomNote {
+  position: absolute;
+  z-index: 1;
+  left: 40%;
+  top: 19%;
+  font-family: "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive;
+  font-size: clamp(13px, 1.4vw, 22px);
+  line-height: 1.35;
+  transform: rotate(-6deg);
+  color: #3c352c;
+  text-transform: uppercase;
+}
+.heroCards {
+  position: absolute;
+  inset: 25% 8% 13% 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) 3fr repeat(3, 1fr);
+  gap: 10px;
+  align-items: center;
+  z-index: 3;
+}
+.heroCardWrap {
+  height: 220px;
+  position: relative;
+}
+.heroCardWrap:nth-child(1) {
+  transform: perspective(800px) rotateY(24deg) rotateZ(-1deg) translateY(10px);
+}
+.heroCardWrap:nth-child(2) {
+  transform: perspective(800px) rotateY(24deg) translateY(20px);
+  height: 195px;
+}
+.heroCardWrap:nth-child(3) {
+  transform: perspective(800px) rotateY(24deg) translateY(32px);
+  height: 170px;
+}
+.heroCardWrap:nth-child(4) {
+  grid-column: 5;
+  height: 170px;
+  transform: perspective(800px) rotateY(-24deg) translateY(32px);
+}
+.heroCardWrap:nth-child(5) {
+  height: 195px;
+  transform: perspective(800px) rotateY(-24deg) translateY(20px);
+}
+.heroCardWrap:nth-child(6) {
+  height: 220px;
+  transform: perspective(800px) rotateY(-24deg) rotateZ(1deg) translateY(10px);
+}
+.heroCard {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 23px;
+  border: 1px solid #e9dfc443;
+  background: linear-gradient(135deg, #ffffff0b, #08080870 65%);
+  backdrop-filter: blur(6px);
+  border-radius: 8px;
+  color: #d6ccbc;
+  box-shadow: 0 15px 25px #0005;
+  transition:
+    border-color 0.3s,
+    background 0.3s,
+    transform 0.3s;
+}
+.heroCard span {
+  font-size: 8px;
+  letter-spacing: 0.01em;
+  color: #efede7;
+}
+.heroCard:hover {
+  border-color: #e5decc99;
+  background: #d0c4b21a;
+  transform: perspective(600px) rotateX(var(--tilt-x, 0deg))
+    rotateY(var(--tilt-y, 0deg)) translateY(-6px);
+}
+.cardArrow {
+  position: absolute;
+  bottom: 15px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.heroCard:hover .cardArrow {
+  opacity: 1;
+}
+.heroConnector {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 140px;
+  z-index: 4;
+  overflow: visible;
+  pointer-events: none;
+}
+.heroConnector path {
+  stroke: #d7cdbb;
+  stroke-width: 0.6;
+  stroke-dasharray: 850;
+  animation: connectorFlow 14s linear infinite;
+}
+.heroConnector circle {
+  fill: #fff9ed;
+  filter: drop-shadow(0 0 5px #e4d5b5);
+}
+.heroAnnotation {
+  position: absolute;
+  right: 1%;
+  top: 8%;
+  color: #c8bca6;
+  font-family: "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive;
+  font-size: 15px;
+  line-height: 1.6;
+  transform: rotate(-8deg);
+  z-index: 4;
+}
+.heroAnnotation svg {
+  display: block;
+  width: 80px;
+  height: 65px;
+  transform: rotate(-20deg);
+}
+.heroBottom {
+  position: absolute;
+  bottom: 22px;
+  left: 6.5%;
+  right: 6.5%;
+  padding: 20px 0 0;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #92918e;
+  font-size: 8px;
+  letter-spacing: 0.17em;
+}
+.heroBottom a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #b6b3ad;
+  letter-spacing: 0.03em;
+  font-size: 10px;
+}
+/* The line resolves with scroll, retaining its original trace. */
+.introduction {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10%;
+  padding-top: 80px;
+  padding-bottom: 50px;
+  border-top: 1px solid #ffffff10;
+}
+.mutedHeading {
+  color: #89857f;
+}
+.clarityVisual {
+  position: relative;
+  align-self: center;
+  min-height: 420px;
+  border: 1px solid var(--border);
+  background: radial-gradient(ellipse at 60% 55%, #1b1b1b, #101010 75%);
+  border-radius: 24px;
+  padding: 12px;
+  overflow: hidden;
+}
+/* Service selection with a changing editorial panel. */
+.servicesSection {
+  background: #0d0d0d;
+  border-block: 1px solid #ffffff12;
+}
+.servicesLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7%;
+  align-items: stretch;
+}
+.serviceItem {
+  border-bottom: 1px solid var(--border);
+}
+.serviceItem:first-child {
+  border-top: 1px solid var(--border);
+}
+.serviceItem > button {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  text-align: left;
+  width: 100%;
+  padding: 27px 0;
+  background: transparent;
+  border: 0;
+  color: #9c9a96;
+  font-size: clamp(16px, 1.65vw, 25px);
+  transition:
+    color 0.2s,
+    padding 0.2s;
+}
+.serviceNumber {
+  font-size: 10px;
+  color: #928a7d;
+  letter-spacing: 0.1em;
+}
+.serviceArrow {
+  margin-left: auto;
+  transition: transform 0.25s;
+}
+.serviceSelected > button,
+.serviceItem > button:hover {
+  color: var(--paper);
+  padding-left: 12px;
+}
+.serviceSelected .serviceArrow {
+  transform: rotate(45deg);
+  color: var(--warm);
+}
+.mobileServiceToggle,
+.mobileServiceDetail {
+  display: none;
+}
+.serviceFeature {
+  border: 1px solid #ffffff2a;
+  background: linear-gradient(135deg, #201e1a, #101010 70%);
+  border-radius: 20px;
+  min-height: 425px;
+  padding: 30px;
+  overflow: hidden;
+}
+.serviceFeatureInner {
+  animation: panelIn 0.4s ease both;
+}
+.serviceFeatureTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: #bcb3a4;
+  font-size: 8px;
+  letter-spacing: 0.1em;
+}
+.serviceIllustration {
+  position: relative;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d9cfbb;
+}
+.serviceIllustration > div {
+  position: absolute;
+  width: 112px;
+  height: 150px;
+  border-radius: 80px 80px 0 0;
+  border: 1px solid #d0c4b24a;
+  transform: rotate(14deg);
+}
+.serviceIllustration > div:nth-child(2) {
+  transform: rotate(-14deg) scale(1.2);
+}
+.serviceIllustration > div:nth-child(3) {
+  transform: rotate(0) scale(1.4);
+  opacity: 0.3;
+}
+.serviceIllustration > svg:first-of-type {
+  position: relative;
+}
+.serviceIllustration > svg:last-child {
+  position: absolute;
+  width: 100%;
+  height: 120px;
+  bottom: 3px;
+  fill: none;
+  stroke: #bdb19a;
+  stroke-width: 0.6;
+}
+.serviceIllustration > svg:last-child path {
+  stroke-dasharray: 1;
+  animation: serviceDraw 1.3s ease both;
+}
+.serviceFeature h3 {
+  font-size: clamp(22px, 2.1vw, 33px);
+  font-weight: 550;
+  margin-bottom: 14px;
+}
+.serviceFeature p {
+  font-size: 13px;
+  line-height: 1.85;
+  color: #b7b2a9;
+  max-width: 410px;
+}
+.featureDetail {
+  display: block;
+  margin-top: 18px;
+  font-size: 10px;
+  color: #a59c8c;
+}
+/* Neutral replaceable founder-story cards in an editorial stack. */
+.testimonials {
+  padding: 90px max(6.5%, calc((100vw - 1350px) / 2)) 25px;
+  border-top: 1px solid #ffffff14;
+  background:
+    radial-gradient(ellipse at 60% 52%, #211e1840, transparent 65%), #08080833;
+  position: relative;
+}
+.storiesLayout {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 30px;
+  align-items: center;
+}
+.storiesIntro h2 {
+  font-size: clamp(32px, 3.1vw, 49px);
+}
+.storiesIntro > p:not(.eyebrow):not(.annotation) {
+  font-size: 13px;
+  line-height: 1.85;
+  color: #b5b1aa;
+  margin-top: 22px;
+  max-width: 265px;
+}
+.placeholderNotice {
+  display: block;
+  color: #9e9483;
+  font-size: 8px;
+  line-height: 1.8;
+  letter-spacing: 0.12em;
+  max-width: 240px;
+  margin-top: 17px;
+}
+.carouselControls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 28px;
+}
+.carouselControls > button {
+  border: 1px solid #ffffff40;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--paper);
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.carouselControls > button:hover {
+  background: #efebe3;
+  color: #111;
+}
+.carouselControls > span {
+  color: #aaa296;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  margin-left: 5px;
+}
+.carouselViewport {
+  min-width: 0;
+  padding: 30px 0;
+}
+.carousel {
+  height: 465px;
+  position: relative;
+  touch-action: pan-y;
+  outline-offset: 10px;
+}
+.storyCard {
+  position: absolute;
+  left: 20%;
+  top: 20px;
+  width: 330px;
+  height: 420px;
+  border-radius: 22px;
+  border: 1px solid #aea59660;
+  background: #161513;
+  overflow: hidden;
+  transform-origin: center bottom;
+  transform: translateX(calc(var(--slot) * 195px))
+    rotate(calc(var(--slot) * -4deg)) scale(calc(1 - var(--depth) * 0.08));
+  filter: brightness(0.6);
+  transition:
+    transform 0.7s cubic-bezier(0.22, 0.7, 0.2, 1),
+    filter 0.7s,
+    background 0.7s;
+  box-shadow: 0 25px 55px #0006;
+}
+.storyActive {
+  transform: translateX(0) rotate(-2deg) scale(1.03);
+  background: #e9e3d9;
+  color: #24211b;
+  filter: brightness(1);
+  border-color: #d7cbbc;
+}
+.storyCategory {
+  position: absolute;
+  z-index: 2;
+  right: 18px;
+  top: 18px;
+  padding: 8px 12px;
+  font-size: 10px;
+  border: 1px solid #ffffff20;
+  background: #080808b0;
+  color: #f5f3ef;
+  border-radius: 9px;
+}
+.placeholderArch {
+  position: absolute;
+  right: -35px;
+  top: 60px;
+  width: 210px;
+  height: 280px;
+  opacity: 0.3;
+  transform: rotate(15deg);
+}
+.placeholderArch span {
+  position: absolute;
+  inset: 0;
+  border: 1px solid #a89c85;
+  border-radius: 120px 120px 0 0;
+}
+.placeholderArch span:nth-child(2) {
+  inset: 20px;
+}
+.placeholderArch span:nth-child(3) {
+  inset: 40px;
+}
+.storyCopy {
+  position: absolute;
+  top: 115px;
+  left: 27px;
+  right: 30px;
+}
+.storyPending {
+  font-size: 8px;
+  letter-spacing: 0.13em;
+  color: #a79b88;
+}
+.storyActive .storyPending {
+  color: #706655;
+}
+.storyCopy h3 {
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.12;
+  margin: 18px 0;
+}
+.storyCopy p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #aaa297;
+  max-width: 250px;
+}
+.storyActive .storyCopy p {
+  color: #625a4f;
+}
+.storyIdentity {
+  position: absolute;
+  left: 27px;
+  bottom: 30px;
+  right: 75px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+}
+.storyIdentity small {
+  font-size: 10px;
+  opacity: 0.65;
+}
+.storySelect {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: transparent;
+  border-radius: inherit;
+}
+.storySelectArrow {
+  position: absolute;
+  bottom: 25px;
+  right: 22px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d7cebf;
+  transition: transform 0.25s;
+}
+.storyActive .storySelectArrow {
+  color: #2c2820;
+}
+.storySelect:hover .storySelectArrow {
+  transform: translateX(3px);
+}
+.page .storySelect:focus-visible {
+  outline-offset: -7px;
+  outline-color: #c1ab80;
+}
+.storyPortrait {
+  object-fit: cover;
+  filter: grayscale(1) brightness(0.55);
+}
+.storyCard:has(.storyPortrait) {
+  color: #f5f3ef;
+}
+.storyCard blockquote {
+  position: absolute;
+  inset: 145px 25px auto;
+  font-size: 20px;
+  line-height: 1.4;
+  margin: 0;
+  text-shadow: 0 2px 5px #000;
+}
+.endnote {
+  border-top: 1px solid #ffffff14;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 22px;
+  color: #9a9286;
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  gap: 20px;
+}
+.endnote a {
+  color: #aaa49a;
+}
+/* Native dialog handles focus trapping, Escape, and focus restoration. */
+.bookingDialog {
+  margin: auto;
+  padding: 0;
+  width: min(520px, calc(100vw - 40px));
+  max-height: calc(100svh - 40px);
+  overflow-y: auto;
+  color: #f5f3ef;
+  background: #171717;
+  border: 1px solid #ffffff40;
+  border-radius: 20px;
+  box-shadow: 0 30px 100px #0009;
+  font-family: var(--font-roboto-sans), sans-serif;
+}
+.bookingDialog::backdrop {
+  background: #000c;
+  backdrop-filter: blur(7px);
+}
+.dialogContent {
+  padding: 45px 35px 35px;
+  position: relative;
+}
+.dialogClose {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  background: transparent;
+  color: #ddd;
+  border: 0;
+  cursor: pointer;
+  padding: 10px;
+}
+.dialogContent h2 {
+  font-size: 38px;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  margin: 20px 0;
+  font-weight: 500;
+}
+.dialogContent p {
+  color: #b9b3a9;
+  line-height: 1.8;
+  font-size: 13px;
+  margin: 15px 0;
+}
+.dialogContent .primaryButton {
+  margin-top: 15px;
+  cursor: pointer;
+}
+@keyframes breatheLight {
+  to {
+    opacity: 0.095;
+    transform: translateY(8px);
+  }
+}
+@keyframes connectorFlow {
+  from {
+    stroke-dashoffset: 850;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes serviceDraw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (min-width: 1700px) {
+  .hero h1 {
+    font-size: 80px;
+  }
+}
+@media (max-width: 1200px) {
+  .section {
+    padding-inline: 5%;
+  }
+  .hero {
+    padding-inline: 5%;
+    min-height: 710px;
+  }
+  .hero h1 {
+    font-size: 5.1vw;
+  }
+  .heroVisual {
+    width: 66%;
+    height: 535px;
+  }
+  .heroAnnotation {
+    right: 2%;
+    top: 3%;
+    font-size: 12px;
+  }
+  .heroCards {
+    gap: 5px;
+    inset-inline: 0 5%;
+  }
+  .heroCard span {
+    font-size: 7px;
+  }
+  .heroCardWrap {
+    height: 190px;
+  }
+  .heroCardWrap:nth-child(6) {
+    height: 190px;
+  }
+  .heroCardWrap:nth-child(2),
+  .heroCardWrap:nth-child(5) {
+    height: 170px;
+  }
+  .heroCardWrap:nth-child(3),
+  .heroCardWrap:nth-child(4) {
+    height: 150px;
+  }
+  .heroActions {
+    gap: 9px;
+  }
+  .primaryButton,
+  .secondaryButton {
+    padding-inline: 19px;
+    gap: 14px;
+  }
+  .secondaryButton {
+    font-size: 10px !important;
+  }
+  .heroDescription {
+    font-size: 14px;
+  }
+  .storiesLayout {
+    grid-template-columns: 265px minmax(0, 1fr);
+    gap: 15px;
+  }
+  .storyCard {
+    width: 295px;
+    left: 12%;
+  }
+  .storyCopy h3 {
+    font-size: 27px;
+  }
+  .heroBottom {
+    left: 5%;
+    right: 5%;
+  }
+}
+@media (max-width: 960px) {
+  .hero {
+    padding-top: 160px;
+    padding-bottom: 100px;
+    min-height: 680px;
+  }
+  .heroCopy {
+    width: 57%;
+  }
+  .hero h1 {
+    font-size: 5.6vw;
+  }
+  .heroVisual {
+    top: 130px;
+    width: 64%;
+    height: 480px;
+    right: -6%;
+    opacity: 0.85;
+  }
+  .heroCards {
+    grid-template-columns: repeat(3, 1fr) 2fr repeat(3, 1fr);
+  }
+  .heroCardWrap:nth-child(-n + 3) {
+    visibility: hidden;
+  }
+  .roomNote {
+    font-size: 14px;
+  }
+  .heroAnnotation {
+    display: none;
+  }
+  .desktopBreak {
+    display: block;
+  }
+  .headingRow {
+    gap: 28px;
+  }
+  .headingRow > p {
+    max-width: 270px;
+    font-size: 12px;
+  }
+  .introduction {
+    gap: 5%;
+  }
+  .bodyCopy {
+    font-size: 13px;
+  }
+  .clarityVisual {
+    min-height: 360px;
+  }
+  .servicesLayout {
+    gap: 5%;
+    grid-template-columns: 1fr 1.05fr;
+  }
+  .serviceItem > button {
+    gap: 16px;
+  }
+  .serviceFeature {
+    padding: 25px;
+  }
+  .serviceFeatureTop {
+    font-size: 7px;
+  }
+  .storiesLayout {
+    grid-template-columns: 225px minmax(0, 1fr);
+    gap: 15px;
+  }
+  .storyCard {
+    width: 280px;
+    height: 400px;
+  }
+  .carousel {
+    height: 440px;
+  }
+  .storiesIntro h2 {
+    font-size: 33px;
+  }
+}
+@media (max-width: 767px) {
+  .section {
+    padding: 70px 7%;
+    scroll-margin-top: 100px;
+  }
+  .sectionHeading {
+    margin-bottom: 32px;
+  }
+  .page h2 {
+    font-size: clamp(28px, 6.9vw, 48px);
+  }
+  .eyebrow {
+    font-size: 8px;
+    letter-spacing: 0.18em;
+    margin-bottom: 18px !important;
+  }
+  .headingRow {
+    display: block;
+  }
+  .headingRow > p {
+    max-width: 100%;
+    font-size: 13px;
+    margin-top: 22px;
+  }
+  .hero {
+    padding: 140px 7% 75px;
+    min-height: 0;
+    display: block;
+  }
+  .heroCopy {
+    width: 100%;
+    pointer-events: auto;
+  }
+  .hero h1 {
+    font-size: clamp(44px, 10.5vw, 76px);
+    max-width: 650px;
+    position: relative;
+  }
+  .heroDescription {
+    margin-top: 20px !important;
+    font-size: 14px;
+  }
+  .desktopBreak {
+    display: none;
+  }
+  .heroActions {
+    margin-top: 24px;
+    gap: 10px;
+  }
+  .primaryButton {
+    min-height: 46px;
+    font-size: 11px !important;
+  }
+  .secondaryButton {
+    min-height: 46px;
+  }
+  .heroVisual {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: calc(100% + 16%);
+    margin: -5px -8% 0;
+    height: clamp(330px, 70vw, 500px);
+    opacity: 1;
+  }
+  .heroCards {
+    inset: 22% 5% 12%;
+    grid-template-columns: repeat(3, 1fr) 2.6fr repeat(3, 1fr);
+    gap: 4px;
+  }
+  .heroCardWrap:nth-child(-n + 3) {
+    visibility: visible;
+  }
+  .heroCardWrap:nth-child(1),
+  .heroCardWrap:nth-child(6) {
+    height: 165px;
+  }
+  .heroCardWrap:nth-child(2),
+  .heroCardWrap:nth-child(5) {
+    height: 145px;
+  }
+  .heroCardWrap:nth-child(3),
+  .heroCardWrap:nth-child(4) {
+    height: 125px;
+  }
+  .heroCard {
+    gap: 15px;
+    backdrop-filter: blur(3px);
+  }
+  .heroCard > svg:first-child {
+    width: 20px;
+  }
+  .heroCard span {
+    font-size: 6px;
+  }
+  .heroConnector {
+    bottom: -20px;
+    height: 90px;
+  }
+  .roomNote {
+    top: 20%;
+    left: 39%;
+    font-size: clamp(10px, 2.7vw, 18px);
+  }
+  .heroBottom {
+    left: 7%;
+    right: 7%;
+    bottom: 0;
+    font-size: 7px;
+    padding: 17px 0;
+  }
+  .heroBottom > a {
+    font-size: 8px;
+    max-width: 135px;
+    text-align: right;
+    gap: 8px;
+  }
+  .introduction {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .bodyCopy {
+    font-size: 14px;
+    max-width: 540px;
+    margin-top: 20px !important;
+  }
+  .clarityVisual {
+    width: 100%;
+    max-width: 480px;
+    min-height: 380px;
+    margin: auto;
+  }
+  .servicesLayout {
+    display: block;
+  }
+  .serviceFeature {
+    display: none;
+  }
+  .serviceNavigation {
+    width: 100%;
+  }
+  .serviceItem > button {
+    font-size: 20px;
+    min-height: 74px;
+    padding: 22px 0;
+    gap: 20px;
+  }
+  .serviceNumber {
+    font-size: 10px;
+  }
+  .serviceArrow {
+    display: none;
+  }
+  .mobileServiceToggle {
+    display: block;
+    margin-left: auto;
+  }
+  .mobileServiceDetail:not([hidden]) {
+    display: block;
+    padding: 0 20px 27px 37px;
+  }
+  .mobileServiceDetail > p {
+    font-size: 13px;
+    line-height: 1.85;
+    color: #c1bbae;
+  }
+  .mobileServiceDetail > small {
+    display: block;
+    font-size: 10px;
+    margin-top: 12px;
+    color: #a99b84;
+  }
+  .serviceSelected > button {
+    padding-left: 0;
+  }
+  .testimonials {
+    padding: 65px 7% 25px;
+  }
+  .storiesLayout {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: stretch;
+  }
+  .storiesIntro > p:not(.eyebrow):not(.annotation) {
+    max-width: 380px;
+  }
+  .storiesIntro h2 {
+    font-size: 38px;
+  }
+  .placeholderNotice {
+    max-width: 100%;
+    font-size: 7px;
+  }
+  .carouselControls {
+    margin-top: 24px;
+  }
+  .carouselViewport {
+    padding: 10px 0 20px;
+    width: 100%;
+  }
+  .carousel {
+    height: 440px;
+  }
+  .storyCard {
+    left: 50%;
+    width: min(78vw, 340px);
+    height: 405px;
+    top: 20px;
+    transform: translateX(-50%) translateX(calc(var(--slot) * 78vw))
+      rotate(calc(var(--slot) * -4deg)) scale(calc(1 - var(--depth) * 0.06));
+  }
+  .storyActive {
+    transform: translateX(-50%) rotate(-2deg) scale(1);
+  }
+  .storyCopy h3 {
+    font-size: 31px;
+  }
+  .endnote {
+    font-size: 6px;
+    line-height: 1.8;
+    letter-spacing: 0.09em;
+  }
+}
+@media (max-width: 380px) {
+  .hero h1 {
+    font-size: 10.3vw;
+  }
+  .heroActions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .heroDescription {
+    font-size: 13px;
+  }
+  .heroCard span {
+    font-size: 5px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page *,
+  .page *::before,
+  .page *::after,
+  .bookingDialog * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .tilt {
+    transform: none !important;
+  }
+  .scrollProgress {
+    display: none;
+  }
+  .page [data-reveal],
+  .page [data-hero-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+/* Final composition refinements, shared across the responsive variants. */
+.primaryButton:hover {
+  transform: translate(var(--magnet-x, 0px), calc(var(--magnet-y, 0px) - 3px));
+}
+.storiesIntro h2 {
+  font-size: clamp(30px, 2.65vw, 42px);
+}
+@media (min-width: 961px) {
+  .hero h1 {
+    font-size: clamp(46px, 4.2vw, 72px);
+  }
+  .desktopBreak {
+    display: block;
+  }
+}
+@media (min-width: 768px) and (max-width: 960px) {
+  .hero {
+    display: block;
+    padding-top: 150px;
+    min-height: 0;
+    padding-bottom: 95px;
+  }
+  .heroCopy {
+    width: 100%;
+  }
+  .hero h1 {
+    font-size: 65px;
+  }
+  .heroVisual {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    height: 480px;
+    margin-top: 15px;
+    opacity: 1;
+  }
+  .heroCardWrap:nth-child(-n + 3) {
+    visibility: visible;
+  }
+  .heroCards {
+    grid-template-columns: repeat(3, 1fr) 3fr repeat(3, 1fr);
+  }
+  .heroCard span {
+    font-size: 8px;
+  }
+  .roomNote {
+    font-size: 19px;
+  }
+  .storyCopy {
+    left: 23px;
+    right: 23px;
+  }
+}
+@media (max-width: 767px) {
+  .heroVisual {
+    height: 460px;
+    margin-top: 0;
+  }
+  .doorway {
+    height: 310px;
+  }
+  .roomNote {
+    font-size: clamp(12px, 2.7vw, 17px);
+  }
+  .heroCards {
+    inset: auto 7% 0;
+    height: 130px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 58px);
+    gap: 10px;
+  }
+  .heroCardWrap:nth-child(n) {
+    height: 58px;
+    grid-column: auto;
+    transform: none;
+  }
+  .heroCard {
+    flex-direction: row;
+    gap: 7px;
+    border-radius: 10px;
+    background: #ffffff05;
+  }
+  .heroCard span {
+    font-size: 8px;
+  }
+  .heroCard > svg:first-child {
+    width: 18px;
+    height: 18px;
+  }
+  .cardArrow {
+    display: none;
+  }
+  .heroConnector {
+    bottom: 115px;
+    height: 70px;
+  }
+  .storiesIntro h2 {
+    font-size: 37px;
+  }
+}
+@media (max-width: 380px) {
+  .heroCard span {
+    font-size: 7px;
+  }
+  .heroCard {
+    gap: 5px;
+  }
+  .heroCard > svg:first-child {
+    width: 15px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .primaryButton:hover {
+    transform: none;
+  }
+}
+.storyCategory {
+  pointer-events: none;
+}
+
+/* Reveal the shared CRT while keeping a stable dark surface behind open copy. */
+.backgroundRegion {
+  background: #080808a6;
+}
+.storiesIntro > p.storiesDisclaimer {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #bdbdbd;
+  margin-top: 18px;
+}
+@media (max-width: 767px) {
+  .introduction {
+    padding-block: 56px 36px;
+  }
+}
+.standaloneBooking {
+  display: flex;
+  justify-content: center;
+  padding: 32px 24px 12px;
+}
+.page .bookingPill {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 12px;
+}
+.page .bookingPill svg {
+  transform: rotate(45deg);
+}
+.finalAction {
+  display: flex;
+  justify-content: center;
+  padding: 24px 0 28px;
+}
+@media (max-width: 767px) {
+  .standaloneBooking {
+    padding-block: 28px 8px;
+  }
+  .finalAction {
+    padding-block: 12px 28px;
+  }
+}
+
+.page .bookingPill:hover svg {
+  transform: translateX(3px) rotate(45deg);
+}
