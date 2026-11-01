@@ -68,7 +68,7 @@ export const initiativesData: InitiativeItem[] = [
       "A structured diagnostic and mentorship clinic helping early-stage student startups validate product-market fit, design go-to-market strategies, and test core functionality with industry mentors.",
     fullDescription:
       "Business Clinic operates as an intensive venture clinic for student entrepreneurs. Through milestone-driven diagnostic frameworks, startups test unit economics, refine problem statements, and build launch-ready MVPs under seasoned advisor guidance.",
-    link: "/about",
+    link: "/business-clinic",
     actionLabel: "Connect with Mentors",
     isExternalLink: false,
     statBadge: "40+ Startups Advised",
