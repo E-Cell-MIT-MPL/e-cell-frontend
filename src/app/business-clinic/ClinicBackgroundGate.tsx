@@ -3,8 +3,8 @@
 import { useEffect, useState, type ReactNode } from "react";
 
 /**
- * Gates the single global canvas for this page. Once first exposed, it stays
- * mounted across scrolling; its render loop is suspended behind the hero.
+ * Gates the single global canvas for the whole Business Clinic page, including
+ * the hero. Keep reduced-motion preferences and suspend it off screen.
  */
 export default function ClinicBackgroundGate({
   children,
@@ -42,7 +42,9 @@ export default function ClinicBackgroundGate({
     };
 
     const observeRegion = () => {
-      const region = document.querySelector("[data-clinic-background-region]");
+      const region =
+        document.querySelector("[data-hero]")?.closest("main") ??
+        document.querySelector("[data-clinic-background-region]");
       if (!region) return false;
       const bounds = region.getBoundingClientRect();
       intersects = bounds.top < window.innerHeight && bounds.bottom > 0;
