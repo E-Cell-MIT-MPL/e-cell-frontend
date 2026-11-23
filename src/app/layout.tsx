@@ -1,6 +1,7 @@
 import type React from "react";
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 
 import "./globals.css";
 import { UserProvider } from "@/components/user-provider";
@@ -30,6 +31,7 @@ export default function RootLayout({
         <body className={`${spaceGrotesk.variable} antialiased bg-[#121212] text-white selection:bg-white selection:text-black min-h-screen relative`}>
           <GlobalCRTWarpBackground />
           <div className="relative z-10">{children}</div>
+          <Analytics />
         </body>
       </UserProvider>
     </html>

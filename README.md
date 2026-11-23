@@ -11,11 +11,12 @@ of [Entrepreneurship Cell, MIT Manipal](https://www.ecellmit.in/)
 2. [First-Time Setup](#first-time-setup)
 3. [How to contribute](#how-to-contribute)
 4. [Learn more about Next.js](#learn-more-about-nextjs)
+5. [Technical Head](#technical-head)
 
 ## Project Organisation
 
 | Directory         | Purpose                                            |
-|-------------------|----------------------------------------------------|
+|-------------------|----------------------------------------------------| 
 | `src/app/`        | React Frontend with Next.js App Router             |
 | `src/components/` | Feature modules (e.g., `healthCheck`, `user`)      |
 | `src/lib/`        | Shared utilities                                   |
@@ -58,7 +59,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 4. Follow the existing code style (passing lints `npm run lint` or `pnpm lint`; formatted code `npm run format` or
    `pnpm format`)
 5. Commit with clear message and push your branch.
-6. Open a pull request describing your change and why it’s beneficial.
+6. Open a pull request describing your change and why it's beneficial.
 7. The head will review and merge once CI (if configured) is passing.
 
 ---
@@ -69,6 +70,14 @@ To learn more about Next.js, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+---
+
+## Technical Head
+
+| Name             | Role           | LinkedIn                                                                                      |
+|------------------|----------------|-----------------------------------------------------------------------------------------------|
+| Sarthak Chaddha  | Technical Head | [LinkedIn](https://www.linkedin.com/in/sarthak-chaddha-8953b5289/) |
 
 ---
 
