@@ -49,6 +49,8 @@ export const services = [
 ];
 
 export type FounderStory =
+  | { status: "wallupi"; id: string; category: string }
+  | { status: "pars"; id: string; category: string }
   | { status: "placeholder"; id: string; category: string }
   | {
       status: "verified";
@@ -60,11 +62,11 @@ export type FounderStory =
       portrait: string;
     };
 
-// Replace a placeholder only with an approved quote, identity, and licensed portrait.
+// Publish only approved quotes and identities; use supplied logos or licensed portraits.
 // Deliberately no generated founders, invented affiliations, or example endorsements.
 export const founderStories: FounderStory[] = [
   { status: "placeholder", id: "validation", category: "Idea → validation" },
-  { status: "placeholder", id: "strategy", category: "Strategy" },
-  { status: "placeholder", id: "mentorship", category: "Mentorship" },
+  { status: "wallupi", id: "wallupi", category: "WallUPI" },
+  { status: "pars", id: "pars", category: "PARS" },
   { status: "placeholder", id: "growth", category: "Network & growth" },
 ];

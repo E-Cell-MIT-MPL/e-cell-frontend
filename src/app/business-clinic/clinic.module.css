@@ -1464,3 +1464,32 @@
 .page .bookingPill:hover svg {
   transform: translateX(3px) rotate(45deg);
 }
+
+/* Shared story frames leave room for the full WallUPI endorsement. */
+.testimonials .carousel {
+  height: calc(var(--story-height, 540px) + 55px);
+}
+.testimonials .storyCard {
+  width: 380px;
+  height: var(--story-height, 540px);
+  left: max(10px, calc((100% - 380px) / 2));
+  transform: translateX(calc(var(--slot) * var(--story-step, 100px)))
+    rotate(calc(var(--slot) * -4deg)) scale(calc(1 - var(--depth) * 0.08));
+}
+.testimonials .storyActive {
+  transform: translateX(0) rotate(-2deg) scale(1.03);
+  background: #f3f0e7;
+  color: #363530;
+  border-color: #e5dfd2;
+}
+@media (max-width: 767px) {
+  .testimonials .storyCard {
+    left: 50%;
+    width: min(calc(100% - 20px), 380px);
+    transform: translateX(-50%) translateX(calc(var(--slot) * 86vw))
+      rotate(calc(var(--slot) * -4deg)) scale(calc(1 - var(--depth) * 0.06));
+  }
+  .testimonials .storyActive {
+    transform: translateX(-50%) rotate(-2deg) scale(1);
+  }
+}

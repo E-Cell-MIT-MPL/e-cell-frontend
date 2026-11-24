@@ -1,15 +1,61 @@
 "use client";
 
-import { useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { founderStories } from "./clinicData";
 import ClinicBookingCTA from "./ClinicBookingCTA";
+import FounderTestimonial from "./WallUPITestimonial";
+import wallupiStyles from "./wallupi.module.css";
 import styles from "./clinic.module.css";
 
 export default function FounderTestimonials() {
   const [active, setActive] = useState(1);
   const touchStart = useRef<number | null>(null);
+  const carousel = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const frame = carousel.current;
+    if (!frame) return;
+    const contents = Array.from(
+      frame.querySelectorAll<HTMLElement>("[data-testimonial-content]"),
+    );
+    const sizeFrames = () => {
+      const heights = contents.map((node) => {
+        const css = getComputedStyle(node);
+        const children = Array.from(node.children).filter(
+          (child) => getComputedStyle(child).position !== "absolute",
+        ) as HTMLElement[];
+        return children.reduce(
+          (height, child) => {
+            const childCSS = getComputedStyle(child);
+            return (
+              height +
+              child.offsetHeight +
+              (parseFloat(childCSS.marginBottom) || 0)
+            );
+          },
+          parseFloat(css.paddingTop) +
+            parseFloat(css.paddingBottom) +
+            parseFloat(css.rowGap) * (children.length - 1),
+        );
+      });
+      frame.style.setProperty(
+        "--story-height",
+        `${Math.max(470, ...heights.map((height) => Math.ceil(height + 6)))}px`,
+      );
+      frame.style.setProperty(
+        "--story-step",
+        `${Math.max(20, Math.min(145, (frame.clientWidth - 460) / 4))}px`,
+      );
+    };
+    const observer = new ResizeObserver(sizeFrames);
+    observer.observe(frame);
+    contents.forEach((node) =>
+      Array.from(node.children).forEach((child) => observer.observe(child)),
+    );
+    sizeFrames();
+    return () => observer.disconnect();
+  }, []);
   const count = founderStories.length;
   const select = (index: number) => setActive((index + count) % count);
   return (
@@ -55,6 +101,7 @@ export default function FounderTestimonials() {
         <div className={styles.carouselViewport}>
           <div
             className={styles.carousel}
+            ref={carousel}
             role="region"
             aria-roledescription="carousel"
             aria-label="Founder story previews"
@@ -92,11 +139,15 @@ export default function FounderTestimonials() {
                   key={story.id}
                   className={
                     styles.storyCard +
-                    (isActive ? " " + styles.storyActive : "")
+                    (isActive ? " " + styles.storyActive : "") +
+                    (story.status === "wallupi" || story.status === "pars"
+                      ? " " + wallupiStyles.card
+                      : "")
                   }
                   style={
                     {
                       "--slot": slot,
+                      width: "min(380px, calc(100% - 20px))",
                       "--depth": Math.abs(slot),
                       zIndex: 20 - Math.abs(slot),
                     } as CSSProperties
@@ -115,8 +166,14 @@ export default function FounderTestimonials() {
                       className={styles.storyPortrait}
                     />
                   )}
-                  <span className={styles.storyCategory}>{story.category}</span>
-                  {story.status === "placeholder" ? (
+                  {story.status !== "wallupi" && story.status !== "pars" && (
+                    <span className={styles.storyCategory}>
+                      {story.category}
+                    </span>
+                  )}
+                  {story.status === "wallupi" || story.status === "pars" ? (
+                    <FounderTestimonial startup={story.status} />
+                  ) : story.status === "placeholder" ? (
                     <>
                       <div
                         className={styles.placeholderArch}
@@ -155,24 +212,30 @@ export default function FounderTestimonials() {
                       </div>
                     </>
                   )}
-                  <button
-                    type="button"
-                    className={styles.storySelect}
-                    tabIndex={isActive ? 0 : -1}
-                    onClick={() => select(index)}
-                    aria-label={
-                      (isActive ? "Current preview: " : "View preview: ") +
-                      story.category
-                    }
-                    aria-pressed={isActive}
-                  >
-                    <span
-                      className={styles.storySelectArrow}
-                      aria-hidden="true"
+                  {((story.status !== "wallupi" && story.status !== "pars") ||
+                    !isActive) && (
+                    <button
+                      type="button"
+                      className={styles.storySelect}
+                      tabIndex={isActive ? 0 : -1}
+                      onClick={() => select(index)}
+                      aria-label={
+                        (isActive ? "Current preview: " : "View preview: ") +
+                        story.category
+                      }
+                      aria-pressed={isActive}
                     >
-                      <ArrowRight size={21} />
-                    </span>
-                  </button>
+                      {story.status !== "wallupi" &&
+                        story.status !== "pars" && (
+                          <span
+                            className={styles.storySelectArrow}
+                            aria-hidden="true"
+                          >
+                            <ArrowRight size={21} />
+                          </span>
+                        )}
+                    </button>
+                  )}
                 </article>
               );
             })}
